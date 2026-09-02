@@ -1,0 +1,386 @@
+GET /public-inventory.txt HTTP/1.1
+Host: localhost
+Connection: keep-alive
+sec-ch-ua: "Chromium";v="152", "Not?A_Brand";v="24", "Microsoft Edge";v="152"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36 Edg/152.0.0.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: es-419,es;q=0.9,es-ES;q=0.8,en;q=0.7,en-GB;q=0.6,en-US;q=0.5,es-CO;q=0.4
+
+
+HTTP/1.1 200 OK
+Server: nginx
+Date: Wed, 02 Sep 2026 23:30:13 GMT
+Content-Type: text/plain
+Content-Length: 1591
+Last-Modified: Wed, 02 Sep 2026 23:24:04 GMT
+Connection: keep-alive
+ETag: "6a98b014-637"
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+Referrer-Policy: no-referrer
+Accept-Ranges: bytes
+
+# ......................................................................................................................................................................................................
+# INVENTARIO DE DISPOSITIVOS DE RED ... ENTORNO LAB (FICTICIO)
+# Generado: 2026-09-02T17:00:00Z
+# Clasificaci..n: USO ACAD..MICO ... DATOS COMPLETAMENTE FICTICIOS
+# Propietario: Blue Team ... Grupo G06
+# ......................................................................................................................................................................................................
+
+DEVICE_ID    | TYPE      | HOSTNAME            | IP_MGMT     | OS_VERSION           | LOCATION   | STATUS
+-------------|-----------|---------------------|-------------|----------------------|------------|--------
+NET-FW-01    | Firewall  | fw-perimetro-lab    | 10.0.1.1    | FortiOS 7.4.1-LAB    | DC-Norte   | Active
+NET-FW-02    | Firewall  | fw-dmz-lab          | 10.0.1.2    | pfSense 2.7-LAB      | DC-Norte   | Active
+NET-RT-01    | Router    | rt-core-lab         | 10.0.2.1    | IOS-XE 17.9-LAB      | DC-Norte   | Active
+NET-RT-02    | Router    | rt-wan-lab          | 10.0.2.2    | IOS-XE 17.9-LAB      | DC-Sur     | Standby
+NET-SW-01    | Switch    | sw-acceso-lab       | 10.0.3.1    | IOS 15.2-LAB         | DC-Norte   | Active
+NET-SW-02    | Switch    | sw-distribucion-lab | 10.0.3.2    | NX-OS 10.3-LAB       | DC-Sur     | Active
+
+# Nota: Todas las IPs y hostnames son ficticios para uso exclusivo del laboratorio.
+# No corresponden a equipos reales en producci..n.
+
+GET / HTTP/1.1
+Host: localhost
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: "Chromium";v="152", "Not?A_Brand";v="24", "Microsoft Edge";v="152"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36 Edg/152.0.0.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: es-419,es;q=0.9,es-ES;q=0.8,en;q=0.7,en-GB;q=0.6,en-US;q=0.5,es-CO;q=0.4
+If-None-Match: W/"6a98b014-c17"
+If-Modified-Since: Wed, 02 Sep 2026 23:24:04 GMT
+
+
+HTTP/1.1 304 Not Modified
+Server: nginx
+Date: Wed, 02 Sep 2026 23:30:20 GMT
+Last-Modified: Wed, 02 Sep 2026 23:24:04 GMT
+Connection: keep-alive
+ETag: "6a98b014-c17"
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+Referrer-Policy: no-referrer
+
+
+GET /style.css HTTP/1.1
+Host: localhost
+Connection: keep-alive
+sec-ch-ua-platform: "Windows"
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36 Edg/152.0.0.0
+sec-ch-ua: "Chromium";v="152", "Not?A_Brand";v="24", "Microsoft Edge";v="152"
+sec-ch-ua-mobile: ?0
+Accept: text/css,*/*;q=0.1
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: style
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: es-419,es;q=0.9,es-ES;q=0.8,en;q=0.7,en-GB;q=0.6,en-US;q=0.5,es-CO;q=0.4
+If-None-Match: "6a98b014-14c5"
+If-Modified-Since: Wed, 02 Sep 2026 23:24:04 GMT
+
+
+HTTP/1.1 304 Not Modified
+Server: nginx
+Date: Wed, 02 Sep 2026 23:30:20 GMT
+Last-Modified: Wed, 02 Sep 2026 23:24:04 GMT
+Connection: keep-alive
+ETag: "6a98b014-14c5"
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+Referrer-Policy: no-referrer
+
+
+GET / HTTP/1.1
+Host: localhost
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: "Chromium";v="152", "Not?A_Brand";v="24", "Microsoft Edge";v="152"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36 Edg/152.0.0.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: es-419,es;q=0.9,es-ES;q=0.8,en;q=0.7,en-GB;q=0.6,en-US;q=0.5,es-CO;q=0.4
+If-None-Match: W/"6a98b014-c17"
+If-Modified-Since: Wed, 02 Sep 2026 23:24:04 GMT
+
+
+HTTP/1.1 304 Not Modified
+Server: nginx
+Date: Wed, 02 Sep 2026 23:30:20 GMT
+Last-Modified: Wed, 02 Sep 2026 23:24:04 GMT
+Connection: keep-alive
+ETag: "6a98b014-c17"
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+Referrer-Policy: no-referrer
+
+
+GET / HTTP/1.1
+Host: localhost
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: "Chromium";v="152", "Not?A_Brand";v="24", "Microsoft Edge";v="152"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36 Edg/152.0.0.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: es-419,es;q=0.9,es-ES;q=0.8,en;q=0.7,en-GB;q=0.6,en-US;q=0.5,es-CO;q=0.4
+If-None-Match: W/"6a98b014-c17"
+If-Modified-Since: Wed, 02 Sep 2026 23:24:04 GMT
+
+
+HTTP/1.1 304 Not Modified
+Server: nginx
+Date: Wed, 02 Sep 2026 23:30:20 GMT
+Last-Modified: Wed, 02 Sep 2026 23:24:04 GMT
+Connection: keep-alive
+ETag: "6a98b014-c17"
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+Referrer-Policy: no-referrer
+
+
+GET / HTTP/1.1
+Host: localhost
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: "Chromium";v="152", "Not?A_Brand";v="24", "Microsoft Edge";v="152"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36 Edg/152.0.0.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: es-419,es;q=0.9,es-ES;q=0.8,en;q=0.7,en-GB;q=0.6,en-US;q=0.5,es-CO;q=0.4
+If-None-Match: W/"6a98b014-c17"
+If-Modified-Since: Wed, 02 Sep 2026 23:24:04 GMT
+
+
+HTTP/1.1 304 Not Modified
+Server: nginx
+Date: Wed, 02 Sep 2026 23:30:20 GMT
+Last-Modified: Wed, 02 Sep 2026 23:24:04 GMT
+Connection: keep-alive
+ETag: "6a98b014-c17"
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+Referrer-Policy: no-referrer
+
+
+GET / HTTP/1.1
+Host: localhost
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: "Chromium";v="152", "Not?A_Brand";v="24", "Microsoft Edge";v="152"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36 Edg/152.0.0.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: es-419,es;q=0.9,es-ES;q=0.8,en;q=0.7,en-GB;q=0.6,en-US;q=0.5,es-CO;q=0.4
+If-None-Match: W/"6a98b014-c17"
+If-Modified-Since: Wed, 02 Sep 2026 23:24:04 GMT
+
+
+HTTP/1.1 304 Not Modified
+Server: nginx
+Date: Wed, 02 Sep 2026 23:30:20 GMT
+Last-Modified: Wed, 02 Sep 2026 23:24:04 GMT
+Connection: keep-alive
+ETag: "6a98b014-c17"
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+Referrer-Policy: no-referrer
+
+
+GET / HTTP/1.1
+Host: localhost
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: "Chromium";v="152", "Not?A_Brand";v="24", "Microsoft Edge";v="152"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36 Edg/152.0.0.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: es-419,es;q=0.9,es-ES;q=0.8,en;q=0.7,en-GB;q=0.6,en-US;q=0.5,es-CO;q=0.4
+If-None-Match: W/"6a98b014-c17"
+If-Modified-Since: Wed, 02 Sep 2026 23:24:04 GMT
+
+
+HTTP/1.1 304 Not Modified
+Server: nginx
+Date: Wed, 02 Sep 2026 23:30:20 GMT
+Last-Modified: Wed, 02 Sep 2026 23:24:04 GMT
+Connection: keep-alive
+ETag: "6a98b014-c17"
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+Referrer-Policy: no-referrer
+
+
+GET /public-inventory.txt HTTP/1.1
+Host: localhost
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: "Chromium";v="152", "Not?A_Brand";v="24", "Microsoft Edge";v="152"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36 Edg/152.0.0.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: es-419,es;q=0.9,es-ES;q=0.8,en;q=0.7,en-GB;q=0.6,en-US;q=0.5,es-CO;q=0.4
+If-None-Match: "6a98b014-637"
+If-Modified-Since: Wed, 02 Sep 2026 23:24:04 GMT
+
+
+HTTP/1.1 304 Not Modified
+Server: nginx
+Date: Wed, 02 Sep 2026 23:30:22 GMT
+Last-Modified: Wed, 02 Sep 2026 23:24:04 GMT
+Connection: keep-alive
+ETag: "6a98b014-637"
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+Referrer-Policy: no-referrer
+
+
+GET /public-inventory.txt HTTP/1.1
+Host: localhost
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: "Chromium";v="152", "Not?A_Brand";v="24", "Microsoft Edge";v="152"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36 Edg/152.0.0.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: es-419,es;q=0.9,es-ES;q=0.8,en;q=0.7,en-GB;q=0.6,en-US;q=0.5,es-CO;q=0.4
+If-None-Match: "6a98b014-637"
+If-Modified-Since: Wed, 02 Sep 2026 23:24:04 GMT
+
+
+HTTP/1.1 304 Not Modified
+Server: nginx
+Date: Wed, 02 Sep 2026 23:30:22 GMT
+Last-Modified: Wed, 02 Sep 2026 23:24:04 GMT
+Connection: keep-alive
+ETag: "6a98b014-637"
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+Referrer-Policy: no-referrer
+
+
+GET /public-inventory.txt HTTP/1.1
+Host: localhost
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: "Chromium";v="152", "Not?A_Brand";v="24", "Microsoft Edge";v="152"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36 Edg/152.0.0.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: es-419,es;q=0.9,es-ES;q=0.8,en;q=0.7,en-GB;q=0.6,en-US;q=0.5,es-CO;q=0.4
+If-None-Match: "6a98b014-637"
+If-Modified-Since: Wed, 02 Sep 2026 23:24:04 GMT
+
+
+HTTP/1.1 304 Not Modified
+Server: nginx
+Date: Wed, 02 Sep 2026 23:30:22 GMT
+Last-Modified: Wed, 02 Sep 2026 23:24:04 GMT
+Connection: keep-alive
+ETag: "6a98b014-637"
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+Referrer-Policy: no-referrer
+
+
+GET /public-inventory.txt HTTP/1.1
+Host: localhost
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: "Chromium";v="152", "Not?A_Brand";v="24", "Microsoft Edge";v="152"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36 Edg/152.0.0.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: es-419,es;q=0.9,es-ES;q=0.8,en;q=0.7,en-GB;q=0.6,en-US;q=0.5,es-CO;q=0.4
+If-None-Match: "6a98b014-637"
+If-Modified-Since: Wed, 02 Sep 2026 23:24:04 GMT
+
+
+HTTP/1.1 304 Not Modified
+Server: nginx
+Date: Wed, 02 Sep 2026 23:30:23 GMT
+Last-Modified: Wed, 02 Sep 2026 23:24:04 GMT
+Connection: keep-alive
+ETag: "6a98b014-637"
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+Referrer-Policy: no-referrer
+

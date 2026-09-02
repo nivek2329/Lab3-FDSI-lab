@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Scripts - NetOps Secure Execution Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container" style="padding-top: 0; padding-bottom: 0;">
+            <div class="navbar-brand">NetOps Secure Execution Portal</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="public-inventory.txt">Inventario</a></li>
+                <li><a href="scripts-catalog.html">Scripts</a></li>
+                <li><a href="simulate.html">Simulador</a></li>
+                <li><a href="audit-log.html">Auditoría</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2>Catálogo de Scripts Aprobados</h2>
+        <p style="color: #8b949e; margin-bottom: 2rem;">Solo scripts de lectura autorizados para el Laboratorio 3</p>
+        
+        <div class="alert alert-warning">
+            <strong>Atención:</strong> Todos los scripts son de solo lectura. Los scripts de escritura/modificación (config terminal, write, etc.) están estrictamente prohibidos en el Laboratorio 3.
+        </div>
+
+        <div style="overflow-x: auto;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Comando Original</th>
+                        <th>Dispositivos Compatibles</th>
+                        <th>Nivel Riesgo</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>SCR-001</td>
+                        <td>Show Running Config</td>
+                        <td><code>show running-config</code></td>
+                        <td>Routers, Switches</td>
+                        <td><span class="badge badge-low">Bajo</span></td>
+                        <td><span class="badge badge-approved">Aprobado</span></td>
+                    </tr>
+                    <tr>
+                        <td>SCR-002</td>
+                        <td>Show Interfaces</td>
+                        <td><code>show interfaces status</code></td>
+                        <td>Routers, Switches</td>
+                        <td><span class="badge badge-low">Bajo</span></td>
+                        <td><span class="badge badge-approved">Aprobado</span></td>
+                    </tr>
+                    <tr>
+                        <td>SCR-003</td>
+                        <td>Show IP Route</td>
+                        <td><code>show ip route</code></td>
+                        <td>Routers</td>
+                        <td><span class="badge badge-low">Bajo</span></td>
+                        <td><span class="badge badge-approved">Aprobado</span></td>
+                    </tr>
+                    <tr>
+                        <td>SCR-004</td>
+                        <td>Show ARP Table</td>
+                        <td><code>show arp</code></td>
+                        <td>Routers, Switches</td>
+                        <td><span class="badge badge-low">Bajo</span></td>
+                        <td><span class="badge badge-approved">Aprobado</span></td>
+                    </tr>
+                    <tr>
+                        <td>SCR-005</td>
+                        <td>Show Version</td>
+                        <td><code>show version</code></td>
+                        <td>Routers, Switches, Firewalls</td>
+                        <td><span class="badge badge-low">Bajo</span></td>
+                        <td><span class="badge badge-approved">Aprobado</span></td>
+                    </tr>
+                    <tr>
+                        <td>SCR-006</td>
+                        <td>Show Firewall Policy</td>
+                        <td><code>get system status</code></td>
+                        <td>Firewalls</td>
+                        <td><span class="badge badge-medium">Medio</span></td>
+                        <td><span class="badge badge-approved">Aprobado</span></td>
+                    </tr>
+                    <tr>
+                        <td>SCR-007</td>
+                        <td>Show VLAN Config</td>
+                        <td><code>show vlan brief</code></td>
+                        <td>Switches</td>
+                        <td><span class="badge badge-low">Bajo</span></td>
+                        <td><span class="badge badge-approved">Aprobado</span></td>
+                    </tr>
+                    <tr>
+                        <td>SCR-008</td>
+                        <td>Show Access Lists</td>
+                        <td><code>show access-lists</code></td>
+                        <td>Routers, Firewalls</td>
+                        <td><span class="badge badge-medium">Medio</span></td>
+                        <td><span class="badge badge-approved">Aprobado</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container" style="padding: 0;">
+            <p>Grupo G06 | Kevin Andrey Ángel Acevedo (Blue Team) | Sergio Daniel Buitrago Suancha (Red Team)</p>
+            <p>Fundamentos de Seguridad de la Información (FDSI) 2026-2</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetOps Secure Execution Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container" style="padding-top: 0; padding-bottom: 0;">
+            <div class="navbar-brand">NetOps Secure Execution Portal</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="public-inventory.txt">Inventario</a></li>
+                <li><a href="scripts-catalog.html">Scripts</a></li>
+                <li><a href="simulate.html">Simulador</a></li>
+                <li><a href="audit-log.html">Auditoría</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="alert alert-info">
+            <strong>Laboratorio 3 FDSI</strong> — Solo se permiten operaciones de lectura y simulaciones. No se realizan cambios sobre equipos reales.
+        </div>
+
+        <div style="text-align: center; margin: 3rem 0;">
+            <h1>Portal de Ejecución Segura de Scripts en Equipos de Red</h1>
+            <p style="color: #8b949e; font-size: 1.1rem; margin-top: 1rem;">
+                Entorno: LAB | Clasificación: FICTICIO | Propietario: Blue Team
+            </p>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h3 class="card-title">🖧 Inventario de Dispositivos</h3>
+                <p>Consulte la lista de firewalls, routers y switches registrados en la red del laboratorio.</p>
+                <br>
+                <a href="public-inventory.txt" class="btn">Ver Inventario</a>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">📋 Catálogo de Scripts</h3>
+                <p>Revise los scripts de comandos remotos aprobados por el equipo de seguridad (solo lectura).</p>
+                <br>
+                <a href="scripts-catalog.html" class="btn">Ver Catálogo</a>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">⚡ Simulador de Ejecución</h3>
+                <p>Prepare y simule la ejecución controlada de scripts sobre los equipos del inventario.</p>
+                <br>
+                <a href="simulate.html" class="btn btn-primary">Ir al Simulador</a>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">📊 Registro de Auditoría</h3>
+                <p>Revise el historial de simulaciones ejecutadas para garantizar la trazabilidad de las acciones.</p>
+                <br>
+                <a href="audit-log.html" class="btn">Ver Auditoría</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container" style="padding: 0;">
+            <p>Grupo G06 | Kevin Andrey Ángel Acevedo (Blue Team) | Sergio Daniel Buitrago Suancha (Red Team)</p>
+            <p>Fundamentos de Seguridad de la Información (FDSI) 2026-2</p>
+        </div>
+    </footer>
+</body>
+</html>
