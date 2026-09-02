@@ -32,12 +32,12 @@ El análisis STRIDE se aplica al portal **NetOps Secure Execution Portal**, un s
 
 | Prioridad | ID | Categoría | Justificación |
 |-----------|-----|-----------|---------------|
-| 🔴 Alta | H1 | Info. Disclosure | Todo el tráfico es observable; afecta confidencialidad del inventario |
-| 🔴 Alta | H5 | Spoofing | Sin autenticación = sin control de identidad |
-| 🟡 Media | H4 | Tampering | MITM teórico; no se ejecuta pero el riesgo existe |
-| 🟡 Media | H6 | Elev. Privilege | Sin roles; todos pueden simular ejecuciones |
-| 🟢 Baja | H2 | Info. Disclosure | Mitigado con server_tokens off |
-| 🟢 Baja | H3 | Repudiation | Mitigado parcialmente con logs |
+|  Alta | H1 | Info. Disclosure | Todo el tráfico es observable; afecta confidencialidad del inventario |
+|  Alta | H5 | Spoofing | Sin autenticación = sin control de identidad |
+|  Media | H4 | Tampering | MITM teórico; no se ejecuta pero el riesgo existe |
+|  Media | H6 | Elev. Privilege | Sin roles; todos pueden simular ejecuciones |
+|  Baja | H2 | Info. Disclosure | Mitigado con server_tokens off |
+|  Baja | H3 | Repudiation | Mitigado parcialmente con logs |
 
 ---
 
