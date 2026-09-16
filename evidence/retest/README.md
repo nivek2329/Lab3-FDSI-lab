@@ -5,7 +5,23 @@ Validación técnica reproducible ejecutada tras aplicar el hardening en Nginx (
 
 ---
 
-## Comandos y Resultados
+## Captura de Pantalla — Ejecución y Verificación en Vivo
+
+A continuación se presenta la evidencia gráfica en terminal con la ejecución secuencial de los comandos de validación:
+
+![Evidencia de Retest y Hardening](retest_evidencias_hardening.png)
+
+### Mapeo de la Evidencia con el Registro de Riesgos (risk-register.md)
+
+| Prueba Ejecutada en la Captura | Hallazgo Visible | Riesgo / Vulnerabilidad Mitigada |
+|:---|:---|:---|
+| `nmap -Pn -sV -p 80 127.0.0.1` | `80/tcp open http nginx` | **R02 Mitigado:** La versión en texto claro (`1.18.0`) y el sistema operativo (`Ubuntu`) fueron totalmente eliminados del escaneo de servicios, mitigando Banner Grabbing y mapeo de CVEs (CVE-2021-23017, CVE-2021-3618, CVE-2022-41741, CVE-2023-44487). |
+| `curl -i http://127.0.0.1/.git/config` | `HTTP/1.1 403 Forbidden` + Cabeceras de seguridad | **R08 Corregido:** Acceso denegado a rutas dotfiles (`.git`). Se evidencian las cabeceras `nosniff`, `DENY` y `no-referrer`. |
+| `curl -s http://127.0.0.1/public-inventory.txt` | Catálogo funcional sin direccionamiento | **R09 Corregido (Paso 16):** Supresión de IPs internas `10.0.X.X` y versiones de SO de red en cumplimiento del principio de menor exposición. |
+
+---
+
+## Comandos y Resultados Detallados
 
 ### 1. Verificación de Banners y Versión del Servidor (Nmap)
 - **Comando:** `nmap -Pn -sV -p 80 127.0.0.1 -oA evidence/retest/nmap_port80`
@@ -13,7 +29,7 @@ Validación técnica reproducible ejecutada tras aplicar el hardening en Nginx (
 - **Resultado post-hardening (Retest):** `80/tcp open http nginx`
 - **Conclusión y Mitigación de Vulnerabilidades:** 
   - La directiva `server_tokens off;` suprimió exitosamente la versión `1.18.0` y el sistema operativo `(Ubuntu)`.
-  - Se mitiga el riesgo de **Banner Grabbing (CWE-200 / Information Disclosure)** y se previene que atacantes mapeen exploits dirigidos a vulnerabilidades conocidas de dicha versión (tales como **CVE-2021-23017**, **CVE-2021-3618**, **CVE-2022-41741**, **CVE-2022-41742** y **CVE-2023-44487**).
+  - Se mitiga el riesgo de **Banner Grabbing (CWE-200 / Information Disclosure)** y se previene que atacantes mapeen exploits dirigidos a vulnerabilidades conocidas de dicha versión.
 
 ### 2. Verificación de Cabeceras de Seguridad HTTP (curl -I)
 - **Comando:** `curl -I http://127.0.0.1/`
