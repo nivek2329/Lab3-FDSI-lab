@@ -1,0 +1,17 @@
+# Prueba de Regla de Detección (Blue Team)
+
+**Regla:** Múltiples 404 (Escaneo de directorios)
+**Comando ejecutado:**
+`sudo awk '$9 ~ /404/ {print $1, $4, $7, $9}' /var/log/nginx/netops-access.log | sort | uniq -c | sort -nr | head`
+
+**Salida (Output):**
+```
+      5 127.0.0.1 [16/Sep/2026:15:17:10 /admin 404
+      1 127.0.0.1 [16/Sep/2026:15:17:12 /api/config 404
+      1 127.0.0.1 [16/Sep/2026:15:17:13 /backup.sql 404
+      1 127.0.0.1 [16/Sep/2026:15:17:15 /config.php 404
+      1 127.0.0.1 [16/Sep/2026:15:17:17 /db.sqlite 404
+```
+
+**Análisis:**
+La regla detectó con éxito que la IP `127.0.0.1` generó 5 respuestas 404 consecutivas en un lapso de 7 segundos (15:17:10 a 15:17:17). Esto confirma la efectividad de la regla para detectar escaneos básicos de fuerza bruta o enumeración de directorios (fuzzing) realizados por el Red Team.

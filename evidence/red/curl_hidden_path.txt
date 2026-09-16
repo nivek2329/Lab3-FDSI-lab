@@ -1,0 +1,15 @@
+HTTP/1.1 200 OK
+Server: nginx/1.18.0 (Ubuntu)
+Date: Wed, 16 Sep 2026 15:18:13 GMT
+Content-Type: text/plain
+Content-Length: 112
+Connection: keep-alive
+
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "origin"]
+	url = https://github.com/nivek2329/Lab3-FDSI-lab.git
+	fetch = +refs/heads/*:refs/remotes/origin/*

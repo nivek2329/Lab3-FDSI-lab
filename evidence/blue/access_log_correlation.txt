@@ -1,0 +1,21 @@
+# Correlación de Eventos (Red Team vs Blue Team)
+
+## Evento 1: Escaneo Nmap
+- **Red Team (Comando):** `nmap -Pn -sV -p 80 127.0.0.1` ejecutado a las 15:15 UTC.
+- **Blue Team (Log):** `127.0.0.1 - - [16/Sep/2026:15:15:05 +0000] "GET / HTTP/1.0" 200 ... "Mozilla/5.0 (compatible; Nmap Scripting Engine; ...)"`
+- **Correlación:** Exitosa. El User-Agent revela claramente el uso de Nmap NSE.
+
+## Evento 2: Extracción de Headers y Versioning
+- **Red Team (Comando):** `curl -i http://127.0.0.1/` a las 15:16:00 UTC.
+- **Blue Team (Log):** `127.0.0.1 - - [16/Sep/2026:15:16:00 +0000] "GET / HTTP/1.1" 200 ... "curl/7.81.0"`
+- **Correlación:** Exitosa. El atacante utilizó curl. Como Nginx no tenía hardening, el log no muestra nada inusual, pero el atacante recibió el header `Server: nginx/1.18.0 (Ubuntu)`.
+
+## Evento 3: Fuzzing de directorios (404s)
+- **Red Team (Comando):** Múltiples peticiones `curl` a rutas inexistentes (`/admin`, `/backup.sql`) a las 15:17 UTC.
+- **Blue Team (Log):** Múltiples registros con código HTTP 404 en `access.log` y errores correspondientes en `error.log` (No such file or directory).
+- **Correlación:** Exitosa. Estos eventos dispararon la regla de detección de múltiples 404.
+
+## Evento 4: Acceso a archivos ocultos (.git)
+- **Red Team (Comando):** `curl -i http://127.0.0.1/.git/config` a las 15:18:13 UTC.
+- **Blue Team (Log):** `127.0.0.1 - - [16/Sep/2026:15:18:13 +0000] "GET /.git/config HTTP/1.1" 200 112 ...`
+- **Correlación:** Exitosa y crítica. El log muestra un código 200 OK, lo que confirma que antes del hardening, un atacante pudo leer la estructura del repositorio git.
