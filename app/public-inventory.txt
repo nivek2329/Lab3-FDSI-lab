@@ -1,18 +1,21 @@
-# ══════════════════════════════════════════════════════════════════
-# INVENTARIO DE DISPOSITIVOS DE RED — ENTORNO LAB (FICTICIO)
-# Generado: 2026-09-02T17:00:00Z
-# Clasificación: USO ACADÉMICO — DATOS COMPLETAMENTE FICTICIOS
-# Propietario: Blue Team — Grupo G06
-# ══════════════════════════════════════════════════════════════════
+﻿# ==================================================================
+# INVENTARIO PUBLICO DE DISPOSITIVOS DE RED — ENTORNO LAB
+# Clasificacion: USO ACADEMICO — DATOS FICTICIOS SANITIZADOS
+# Politica: Principio de Menor Exposicion (Post-Hardening Fase E, Paso 16)
+# Propietario: NetOps Portal — Grupo G06
+# ==================================================================
 
-DEVICE_ID    | TYPE      | HOSTNAME            | IP_MGMT     | OS_VERSION           | LOCATION   | STATUS
--------------|-----------|---------------------|-------------|----------------------|------------|--------
-NET-FW-01    | Firewall  | fw-perimetro-lab    | 10.0.1.1    | FortiOS 7.4.1-LAB    | DC-Norte   | Active
-NET-FW-02    | Firewall  | fw-dmz-lab          | 10.0.1.2    | pfSense 2.7-LAB      | DC-Norte   | Active
-NET-RT-01    | Router    | rt-core-lab         | 10.0.2.1    | IOS-XE 17.9-LAB      | DC-Norte   | Active
-NET-RT-02    | Router    | rt-wan-lab          | 10.0.2.2    | IOS-XE 17.9-LAB      | DC-Sur     | Standby
-NET-SW-01    | Switch    | sw-acceso-lab       | 10.0.3.1    | IOS 15.2-LAB         | DC-Norte   | Active
-NET-SW-02    | Switch    | sw-distribucion-lab | 10.0.3.2    | NX-OS 10.3-LAB       | DC-Sur     | Active
+DEVICE_ID    | TYPE      | ROL_FUNCIONAL                | ESTADO
+-------------|-----------|------------------------------|---------
+NET-FW-01    | Firewall  | Perimetro Externo            | Activo
+NET-FW-02    | Firewall  | Zona Desmilitarizada (DMZ)   | Activo
+NET-RT-01    | Router    | Enrutamiento Core            | Activo
+NET-RT-02    | Router    | Enlace WAN                   | Standby
+NET-SW-01    | Switch    | Capa de Acceso               | Activo
+NET-SW-02    | Switch    | Capa de Distribucion         | Activo
 
-# Nota: Todas las IPs y hostnames son ficticios para uso exclusivo del laboratorio.
-# No corresponden a equipos reales en producción.
+# Justificacion del cambio (Paso 16):
+# Se eliminaron las columnas IP_MGMT (10.0.X.X), OS_VERSION (FortiOS, IOS-XE, pfSense)
+# y LOCATION (DC-Norte, DC-Sur) para mitigar Information Disclosure.
+# Un usuario publico o externo no requiere conocer direccionamiento IP interno
+# ni versiones de firmware para consultar el catalogo funcional de equipos.
