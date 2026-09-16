@@ -9,13 +9,13 @@ Prototipo de portal web para la ejecución controlada de scripts en equipos de r
 | Rol | Integrante | Responsabilidad |
 |-----|-----------|----------------|
 | Blue Team | Kevin Andrey Ángel Acevedo | Defensa, monitoreo, logs, detecciones, hardening |
-| Red Team | Sergio Daniel Buitrago Suancha | Reconocimiento, validación, pruebas autorizadas |
+| Red Team | Sergio Daniel Buitrago Suancha y Daniel Julian Peña Bonilla | Reconocimiento, validación, pruebas autorizadas |
 
 ### Reflexiones Individuales
 **Kevin Andrey Ángel Acevedo (Blue Team):** 
 Durante este laboratorio comprendí la importancia crítica de la visibilidad y correlación de eventos. Al analizar el tráfico HTTP en texto plano con Wireshark, evidencié cómo la falta de cifrado expone toda la estructura de la red (Information Disclosure). Además, al correlacionar los logs de Nginx, pude identificar patrones de escaneo de rutas (404), pero noté las limitaciones de basarse únicamente en IPs sin identidad. Esto demuestra que asegurar los headers y ocultar la versión del servidor mitiga el reconocimiento automatizado, pero la verdadera solución requiere TLS y autenticación robusta, sentando la base para el próximo laboratorio.
 
-**Sergio Daniel Buitrago Suancha (Red Team):**
+**Sergio Daniel Buitrago Suancha y Daniel Julian Peña Bonilla (Red Team):**
 Al realizar las pruebas ofensivas sobre el portal, quedó claro lo sencillo que es enumerar un servidor web que carece de endurecimiento básico. Herramientas como Nmap y curl me permitieron identificar rápidamente la versión de Nginx y extraer información sensible del inventario sin ejecutar ningún exploit complejo. Además, la capacidad de acceder a archivos ocultos (como .git/config) y al simulador de scripts sin ninguna barrera de autenticación valida la hipótesis de Spoofing y Elevación de Privilegios. Esto subraya que la seguridad por oscuridad no es efectiva y que las aplicaciones web deben ser diseñadas asumiendo que la red está comprometida.
 
 ## Arquitectura
