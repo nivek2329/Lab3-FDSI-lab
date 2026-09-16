@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ZAP Scanning Report - NetOps Portal</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 2rem; background-color: #f8fafc; color: #1e293b; }
+        .container { max-width: 900px; margin: 0 auto; background: white; padding: 2.5rem; border-radius: 8px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
+        h1 { color: #0f172a; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.75rem; }
+        h2 { color: #334155; margin-top: 2rem; }
+        .meta-table, .alert-table { width: 100%; border-collapse: collapse; margin-top: 1rem; margin-bottom: 1.5rem; }
+        .meta-table td, .alert-table th, .alert-table td { padding: 0.75rem; border: 1px solid #cbd5e1; text-align: left; }
+        .alert-table th { background-color: #f1f5f9; font-weight: 600; }
+        .badge { display: inline-block; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; }
+        .badge-medium { background-color: #fed7aa; color: #9a3412; }
+        .badge-low { background-color: #fef08a; color: #854d0e; }
+        .badge-info { background-color: #bae6fd; color: #0369a1; }
+        .alert-card { border: 1px solid #e2e8f0; border-radius: 6px; padding: 1.25rem; margin-bottom: 1.25rem; background: #ffffff; }
+        .alert-card h3 { margin-top: 0; display: flex; justify-content: space-between; align-items: center; }
+        code { background: #f1f5f9; padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+        .footer { margin-top: 3rem; font-size: 0.85rem; color: #64748b; text-align: center; border-top: 1px solid #e2e8f0; padding-top: 1rem; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>OWASP ZAP 2.13.0 — Reporte de Inspección Pasiva</h1>
+    <p><strong>Laboratorio 3 FDSI</strong> — Secure Product Challenge | Grupo G06</p>
+    
+    <table class="meta-table">
+        <tr><td><strong>Objetivo (Target):</strong></td><td><code>http://127.0.0.1/</code></td></tr>
+        <tr><td><strong>Tipo de Escaneo:</strong></td><td>Inspección Pasiva (Manual Explore - Sin Active Scan)</td></tr>
+        <tr><td><strong>Fecha y Hora UTC:</strong></td><td>2026-09-16T15:20:00Z</td></tr>
+        <tr><td><strong>Herramienta:</strong></td><td>OWASP Zed Attack Proxy (ZAP) v2.13.0</td></tr>
+        <tr><td><strong>Evaluadores:</strong></td><td>Red Team (Sergio Buitrago & Daniel Peña) / Blue Team (Kevin Ángel)</td></tr>
+    </table>
+
+    <h2>Resumen de Alertas Detectadas</h2>
+    <table class="alert-table">
+        <thead>
+            <tr><th>Alerta</th><th>Riesgo</th><th>Instancias</th><th>Estado Retest (Fase F)</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Ausencia de Anti-CSRF Tokens</td><td><span class="badge badge-low">Bajo</span></td><td>1 (/simulate.html)</td><td>Pendiente Lab 4</td></tr>
+            <tr><td>Missing Anti-clickjacking Header (X-Frame-Options)</td><td><span class="badge badge-medium">Medio</span></td><td>4 (todas las rutas)</td><td>Corregido en Fase E</td></tr>
+            <tr><td>X-Content-Type-Options Header Missing</td><td><span class="badge badge-low">Bajo</span></td><td>4 (todas las rutas)</td><td>Corregido en Fase E</td></tr>
+            <tr><td>Server Leaks Version Information via "Server" Header</td><td><span class="badge badge-low">Bajo</span></td><td>4 (todas las rutas)</td><td>Corregido en Fase E</td></tr>
+        </tbody>
+    </table>
+
+    <h2>Detalle de Observaciones de Cabeceras y Rutas</h2>
+
+    <div class="alert-card">
+        <h3>1. Ausencia de Cabecera X-Frame-Options <span class="badge badge-medium">Medio</span></h3>
+        <p><strong>Descripción:</strong> El servidor web no incluyó la directiva <code>X-Frame-Options</code>, lo que permite que el portal sea renderizado dentro de un elemento <code>&lt;iframe&gt;</code> en un dominio de un atacante (Clickjacking).</p>
+        <p><strong>Evidencia:</strong> Cabecera ausente en respuesta HTTP inicial.</p>
+        <p><strong>Corrección aplicada:</strong> <code>add_header X-Frame-Options "DENY" always;</code> en Nginx.</p>
+    </div>
+
+    <div class="alert-card">
+        <h3>2. Ausencia de Cabecera X-Content-Type-Options <span class="badge badge-low">Bajo</span></h3>
+        <p><strong>Descripción:</strong> El navegador podría interpretar archivos estáticos con un tipo MIME diferente al declarado (MIME Sniffing), exponiendo vectores de cross-site scripting si se cargan recursos no confiables.</p>
+        <p><strong>Corrección aplicada:</strong> <code>add_header X-Content-Type-Options "nosniff" always;</code> en Nginx.</p>
+    </div>
+
+    <div class="alert-card">
+        <h3>3. Fuga de Versión del Servidor (Server Header) <span class="badge badge-low">Bajo</span></h3>
+        <p><strong>Descripción:</strong> La cabecera <code>Server</code> retorna el valor <code>nginx/1.18.0 (Ubuntu)</code>, facilitando a un atacante la identificación de vulnerabilidades específicas para esa versión.</p>
+        <p><strong>Corrección aplicada:</strong> <code>server_tokens off;</code> en Nginx.</p>
+    </div>
+
+    <div class="alert-card">
+        <h3>4. Ausencia de Tokens Anti-CSRF <span class="badge badge-low">Bajo</span></h3>
+        <p><strong>Descripción:</strong> El formulario de simulación en <code>/simulate.html</code> no incluye protección contra Cross-Site Request Forgery.</p>
+        <p><strong>Tratamiento:</strong> Riesgo aceptado pedagógicamente para el Lab 3. Se implementará con autenticación, sesiones y roles en el Laboratorio 4.</p>
+    </div>
+
+    <div class="footer">
+        Reporte generado con fines académicos y de auditoría defensiva — FDSI 2026-2
+    </div>
+</div>
+</body>
+</html>

@@ -1,6 +1,6 @@
-# Análisis STRIDE — Laboratorio 3
+﻿# Análisis STRIDE — Laboratorio 3
 
-## Grupo G06 | Kevin Ángel (Blue) · Sergio Buitrago (Red) | FDSI 2026-2
+## Grupo G06 | Daniel Peña (Product / Security Lead) · Kevin Ángel (Blue) · Sergio Buitrago (Red) | FDSI 2026-2
 
 ## Modelo de Amenazas
 
@@ -8,10 +8,10 @@ El análisis STRIDE se aplica al portal **NetOps Secure Execution Portal**, un s
 
 ### Activos identificados
 1. Portal web (HTML estático servido por Nginx)
-2. Inventario de dispositivos de red (public-inventory.txt)
+2. Inventario de dispositivos de red (`public-inventory.txt` - Sanitizado en Paso 16)
 3. Catálogo de scripts aprobados
 4. Simulador de ejecución y registro de auditoría
-5. Logs del servidor (access.log, error.log)
+5. Logs del servidor (`netops-access.log`, `netops-error.log`)
 
 ---
 
@@ -19,8 +19,8 @@ El análisis STRIDE se aplica al portal **NetOps Secure Execution Portal**, un s
 
 | ID | Categoría STRIDE | Hipótesis técnica | Método de validación | Resultado esperado | Evidencia |
 |----|-----------------|-------------------|---------------------|-------------------|----------|
-| H1 | **Information Disclosure** | HTTP permite observar el inventario de dispositivos y los outputs de scripts en tránsito. Un observador pasivo en la red puede leer toda la información. | Captura PCAP con tcpdump filtrada en puerto 80; inspección con Wireshark | Contenido del inventario visible en texto plano dentro del PCAP | `evidence/blue/lab3-http.pcap` |
-| H2 | **Information Disclosure** | Los headers de respuesta HTTP revelan la tecnología del servidor (versión de Nginx), facilitando la identificación de vulnerabilidades conocidas. | `curl -I $TARGET_URL/` y ZAP en modo pasivo | Header `Server: nginx/X.X.X` visible antes del hardening | `evidence/red/curl_headers.txt` |
+| H1 | **Information Disclosure** | HTTP permite observar el inventario de dispositivos y los outputs de scripts en tránsito. Un observador pasivo en la red puede leer toda la información. | Captura PCAP con tcpdump filtrada en puerto 80; inspección con Wireshark | Contenido del inventario visible en texto plano dentro del PCAP | `evidence/blue/lab3-http.pcap` y `evidence/blue/trafico_red_wireshark.txt` |
+| H2 | **Information Disclosure** | Los headers de respuesta HTTP revelan la tecnología del servidor (versión de Nginx), facilitando la identificación de vulnerabilidades conocidas. | `curl -I $TARGET_URL/` y ZAP en modo pasivo | Header `Server: nginx/X.X.X` visible antes del hardening | `evidence/red/curl_headers.txt` / `evidence/retest/headers_after.txt` |
 | H3 | **Repudiation** | Sin un mecanismo de correlación temporal robusto, el equipo no puede atribuir con certeza qué IP realizó cada solicitud al inventario o al simulador. | Comparar timestamps de comandos Red Team con registros en access.log | Correlación posible pero no garantizada (NTP, timezone) | `evidence/blue/access_log_correlation.txt` |
 | H4 | **Tampering** | Sin TLS, un intermediario (MITM) podría alterar el contenido del inventario o los resultados del simulador durante el tránsito. No se ejecutará MITM real. | Demostrar ausencia de protección de integridad; verificar que no hay checksum ni firma | HTTP no ofrece mecanismo de integridad nativo | Análisis teórico documentado |
 | H5 | **Spoofing** | Sin autenticación, cualquier usuario con acceso a la red puede hacerse pasar por un operador autorizado y acceder al portal completo, incluyendo el simulador. | Acceso anónimo desde Kali al portal; navegación a simulate.html sin credenciales | Acceso completo sin restricciones | `evidence/red/curl_home.txt` |
