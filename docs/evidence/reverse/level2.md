@@ -12,13 +12,17 @@ Al importar `crackme_level2` en Ghidra e inspeccionar la función `main`, se ide
 ### A. Condiciones de Validación Identificadas:
 1. **Longitud requerida:** 
    Se calcula `strlen(candidate)` y se compara contra `0x11` (17 caracteres exactos en decimal). Si la longitud difiere, la función retorna inmediatamente `0`.
-2. **Máscara Cíclica de Transformación (`k`):**
+   <img width="949" height="186" alt="image" src="https://github.com/user-attachments/assets/a2a3f43d-d252-44c8-a3c0-b815d7d434ba" />
+
+3. **Máscara Cíclica de Transformación (`k`):**
    Arreglo constante de 4 bytes ubicado en `.rodata` (`0x40208b`):
    ```c
    const unsigned char k[4] = { 0x23, 0x51, 0x17, 0x6a }; // ASCII: '#', 'Q', '\x17', 'j'
    ```
    El byte de la máscara correspondiente a la posición $i$ se selecciona mediante la operación bit a bit `i & 3` (equivalente a $i \pmod 4$).
-3. **Arreglo Esperado (`expected`):**
+   <img width="949" height="906" alt="image" src="https://github.com/user-attachments/assets/af86379a-8d36-4352-8457-67d6929c3f5c" />
+
+5. **Arreglo Esperado (`expected`):**
    Arreglo de 17 bytes ubicado en `.rodata` (`0x402090`):
    ```c
    const unsigned char expected[17] = {
@@ -88,6 +92,8 @@ Calculando de forma determinista para cada índice de $i = 0$ hasta $16$:
 **Clave de licencia resultante:** `FDSI-REVERSE-2026`
 
 ---
+<img width="952" height="586" alt="image" src="https://github.com/user-attachments/assets/af82d0eb-7200-4208-881c-74caab3042d5" />
+
 
 ## 5. Ejecución y Verificación de la Bandera (FLAG)
 Al ejecutar el binario con la clave calculada:
