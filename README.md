@@ -1,4 +1,4 @@
-﻿# 🔒 NetOps Secure Execution Portal — Laboratorio 3 FDSI
+﻿#  NetOps Secure Execution Portal — Laboratorio 3 FDSI
 
 ## Descripción del Proyecto
 Prototipo web para la **ejecución controlada de scripts en equipos de red** (firewalls, routers y switches), enmarcado en el *Secure Product Challenge* de Fundamentos de Seguridad de la Información (FDSI). El sistema permite consultar un inventario de dispositivos y simular la ejecución de comandos de solo lectura aprobados por el equipo de ciberseguridad, garantizando la trazabilidad de cada acción.
@@ -28,7 +28,7 @@ Prototipo web para la **ejecución controlada de scripts en equipos de red** (fi
 
 ---
 
-## 🏗️ Arquitectura y Modelo de Confianza (DFD)
+##  Arquitectura y Modelo de Confianza (DFD)
 
 La arquitectura del laboratorio establece tres zonas delimitadas por fronteras de confianza (*Trust Boundaries*):
 1. **TB-1 (Límite de Red Externa/LAN):** Separa el origen del tráfico (estación Red Team / Kali) del host objetivo mediante reglas de firewall UFW.
@@ -39,7 +39,7 @@ La arquitectura del laboratorio establece tres zonas delimitadas por fronteras d
 
 ---
 
-## ⚙️ Variables de Entorno del Ejercicio
+##  Variables de Entorno del Ejercicio
 ```bash
 export TARGET_IP=127.0.0.1
 export TARGET_URL=http://$TARGET_IP
@@ -49,7 +49,7 @@ date -u +%Y-%m-%dT%H:%M:%SZ
 
 ---
 
-## 🚀 Procedimiento de Reproducción
+##  Procedimiento de Reproducción
 
 ### 1. Preparación del Host y Firewall (Fase A, Paso 1-5)
 ```bash
@@ -87,7 +87,7 @@ sudo nginx -t && sudo systemctl reload nginx
 
 ---
 
-## 🎯 Inventario de Superficie de Ataque (Paso 9)
+##  Inventario de Superficie de Ataque (Paso 9)
 
 | Elemento | Dato Observado | Riesgo / Pregunta Analítica |
 | :--- | :--- | :--- |
@@ -99,7 +99,7 @@ sudo nginx -t && sudo systemctl reload nginx
 
 ---
 
-## ⏱️ Línea de Tiempo Purple Team (Paso 14)
+##  Línea de Tiempo Purple Team (Paso 14)
 
 | Hora UTC | Acción Red Team | Evidencia Blue Team | Conclusión |
 | :---: | :--- | :--- | :--- |
@@ -113,7 +113,7 @@ sudo nginx -t && sudo systemctl reload nginx
 
 ---
 
-## 🔄 Comparación Antes / Después de las Correcciones
+##  Comparación Antes / Después de las Correcciones
 
 ```
 ==============================================================================================
@@ -131,7 +131,7 @@ Inventario Público          Exponía IPs de gestión y SOs     Sanitizado (Role
 
 ---
 
-## ❓ 12. Preguntas de Análisis y Conclusiones
+##  12. Preguntas de Análisis y Conclusiones
 
 ### 1. ¿Qué pudo observar el Red Team sin explotar ninguna vulnerabilidad?
 Sin enviar payloads ni aprovechar fallos de software, el Red Team obtuvo:
@@ -163,12 +163,12 @@ Durante el análisis asistido por IA, el modelo infirió que *"el acceso a /.git
 
 ---
 
-## 🤖 Uso Responsable de IA
+##  Uso Responsable de IA
 La IA se utilizó conforme a la Sección 7 como copiloto analítico para estructurar el modelo de amenazas y formular hipótesis defensivas. No se compartieron secretos ni datos reales, y cada inferencia fue contrastada manualmente. El detalle del prompt ejecutado, respuestas y alucinaciones detectadas se encuentra en [`evidence/ia-analysis.md`](evidence/ia-analysis.md).
 
 ---
 
-## 📁 Estructura del Repositorio
+##  Estructura del Repositorio
 ```
 Lab3-FDSI-lab/
 ├── app/                        # Aplicación web estática del portal
