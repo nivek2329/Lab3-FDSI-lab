@@ -17,6 +17,7 @@ Reading symbols from ./crackme_level2...
 (gdb) break validate_key
 Breakpoint 1 at 0x401156: file crackme_level2.c, line 12.
 ```
+<img width="950" height="522" alt="image" src="https://github.com/user-attachments/assets/a635ba67-28c4-4bb6-9b2b-d8615e3154a6" />
 
 ---
 
@@ -77,6 +78,7 @@ License accepted.
 FLAG{ghidra_plus_gdb}
 [Inferior 1 (process 4130) exited normally]
 ```
+<img width="954" height="774" alt="image" src="https://github.com/user-attachments/assets/1ca667c7-1bd2-4a8d-81b6-d488109385b3" />
 
 **Análisis de la confirmación:**
 * Con la clave `FDSI-REVERSE-2026`, todos los bytes transformados coincidieron con el arreglo esperado, por lo que el acumulador interno finalizó en `0`.
