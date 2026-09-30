@@ -55,14 +55,45 @@ Lab3-FDSI-lab/
 ├── app/                        # Archivos web estáticos
 ├── nginx/                      # Configuración de servidor web
 ├── diagrams/                   # Diagramas de Flujo de Datos
+├── docs/evidence/reverse/      # Evidencias de Ingeniería Inversa (Parte 2)
+│   ├── baseline.txt            # Hashes SHA-256 e identificación ELF
+│   ├── level1.md               # Reconocimiento y strings
+│   ├── level2.md               # Reconstrucción algorítmica y Ghidra
+│   ├── gdb.md                  # Depuración dinámica y confirmación en tiempo de ejecución
+│   └── screenshots/            # Capturas de soporte
 ├── evidence/                   # Evidencias de ejecución
 │   ├── red/                    # Escaneos y pruebas ofensivas
 │   └── blue/                   # Logs y capturas de red
 ├── reports/zap-passive/        # Reporte exportado de ZAP
+├── reverse-analysis.md         # Respuestas a las preguntas de análisis de Ingeniería Inversa
 ├── risk-register.md            # Registro de riesgos y mitigaciones
 ├── stride-analysis.md          # Análisis de amenazas
 └── README.md                   # Este documento
 ```
 
+---
+
+## Parte 2 — Reverse Engineering Challenge Lab (Local CTF)
+
+### Descripción
+Ruta de laboratorio local orientada a la ingeniería inversa de binarios compilados en C para arquitectura Linux ELF x86-64, sin acceso al código fuente.
+
+### Resumen de Banderas Obtenidas (CTF Flags)
+| Nivel | Binario | Clave Encontrada | Bandera (FLAG) | Método |
+| :--- | :--- | :--- | :--- | :--- |
+| **Nivel 1** | `crackme_level1` | `REDTEAM-101` | `FLAG{strings_are_evidence}` | Reconocimiento estático con `strings` y `objdump` |
+| **Nivel 2** | `crackme_level2` | `FDSI-REVERSE-2026` | `FLAG{ghidra_plus_gdb}` | Decompilación en Ghidra, reversión XOR e inspección GDB |
+| **Boss Level** | `crackme_level2_stripped` | `FDSI-REVERSE-2026` | `FLAG{ghidra_plus_gdb}` | Análisis de binario sin símbolos mediante referencias cruzadas (XREFs) |
+
+### Documentación de Evidencias
+* **[Baseline Forense](docs/evidence/reverse/baseline.txt):** Hashes SHA-256 oficiales, tipos de archivo y cabeceras ELF.
+* **[Nivel 1 - Recon](docs/evidence/reverse/level1.md):** Identificación de secretos embebidos en texto claro.
+* **[Nivel 2 - Decompile](docs/evidence/reverse/level2.md):** Reconstrucción del algoritmo de validación XOR y pseudocódigo propio.
+* **[Confirmación Dinámica GDB](docs/evidence/reverse/gdb.md):** Sesión de depuración con registros `RAX`/`RDI` y bifurcaciones condicionales.
+* **[Preguntas de Análisis](reverse-analysis.md):** Respuestas técnicas a los 7 interrogantes planteados en la guía docente.
+
+---
+
 ## Uso Responsable de IA
-La IA funcionó como copiloto analítico para depurar configuraciones y estructurar las hipótesis STRIDE. Ningún PCAP fue enviado completo y todos los datos usados son estrictamente ficticios.
+La IA funcionó como copiloto analítico para depurar configuraciones y estructurar las hipótesis STRIDE y de ingeniería inversa. Ningún PCAP fue enviado completo y todos los datos usados son estrictamente académicos/ficticios.
+
