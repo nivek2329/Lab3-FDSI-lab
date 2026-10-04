@@ -50,8 +50,8 @@ Mientras que `objdump` únicamente ofrece una representación lineal de instrucc
 ### 5. ¿Qué confirmó GDB que el análisis estático por sí solo no demostraba?
 GDB permitió la comprobación empírica en tiempo de ejecución:
 1. Validó que el flujo del programa en `main` depende directamente del valor retornado en el registro `RAX` (`0` para clave errónea, `1` para clave válida).
-2. Permitió observar el estado real de los registros del procesador (`RDI`, `RAX`, banderas `ZF`) en los puntos de decisión críticos.
-3. Descartó posibles mecanismos de ofuscación dinámica, trampas anti-análisis o corrupción de memoria que el análisis puramente estático no puede prever con total certeza.
+2. Permitió examinar la entrada recibida y el valor de retorno en EAX en los puntos de interrupción usados. ZF se deduce de test eax,eax; no se documentó una lectura directa de esa bandera con GDB.
+3. La sesión confirma los casos de prueba ejecutados; no demuestra que se descarten todos los mecanismos anti-análisis o corrupción de memoria.
 
 ---
 

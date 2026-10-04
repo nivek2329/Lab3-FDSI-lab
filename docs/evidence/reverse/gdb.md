@@ -116,7 +116,7 @@ FLAG{ghidra_plus_gdb}
 - Que la hipótesis funciona **en ejecución real**: el retorno cambia de 0 a 1 solo con la clave reconstruida.
 - Los valores concretos en registros y memoria: longitud real contra la esperada, operandos del XOR y valor final del acumulador `score`.
 - Que la decisión depende únicamente de `EAX` al volver de `validate_key`, que es lo que evalúa `test eax,eax` en `main`.
-- Que el diseño con `|=` recorre los 17 bytes aunque el primero falle (caso B), es decir, una comparación en tiempo constante.
+- Que el bucle procesa los 17 bytes cuando la longitud es válida, sin salir al primer byte distinto. Esto no demuestra que toda la función tenga tiempo constante.
 
 ## 6. Boss: la misma confirmación sin símbolos
 

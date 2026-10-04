@@ -178,7 +178,7 @@ Evidencia: `screenshots/18_nivel2_wsl_clave_valida_flag.png` (ejecución en WSL 
 - Ofuscar la clave con XOR **no es cifrado**: la clave `k` y el resultado `expected` viajan dentro del mismo binario, así que el proceso se invierte en segundos.
 - Cualquier validación hecha **solo del lado del cliente** puede reconstruirse con un decompilador (Ghidra).
 - Las licencias y secretos reales deben validarse en un servidor, o con firmas asimétricas (el binario guarda solo la clave **pública**). Si hay que comparar secretos, se debe usar un hash lento con sal.
-- Lo bueno del diseño: el acumulador `|=` hace la comparación en tiempo constante. Aun así, eso no compensa tener el secreto embebido.
+- Lo bueno del diseño: el acumulador evita salir al primer byte distinto y procesa los 17 bytes si la longitud es correcta. Eso no basta para afirmar que toda la validación tenga tiempo constante. Aun así, eso no compensa tener el secreto embebido.
 
 ---
 
