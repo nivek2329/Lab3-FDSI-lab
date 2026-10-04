@@ -30,6 +30,37 @@ Repositorio de entrega del laboratorio 4 de Fundamentos de Seguridad Informátic
 2. Sigue [`docs/evidence/reverse/README.md`](docs/evidence/reverse/README.md) en orden. Cada sección enlaza las capturas y los logs que respaldan el resultado.
 3. Para el análisis detallado y el guion de cierre, consulta [`reverse-analysis.md`](reverse-analysis.md).
 
+## Evidencias visuales por punto
+
+Las capturas principales se muestran a continuación. El [índice de evidencias](docs/evidence/reverse/README.md) contiene la galería completa organizada por cada punto de la guía, con todas las capturas, sus descripciones y enlaces a los análisis.
+
+### Puntos 0–1 · Preparación y baseline
+
+![Hashes SHA-256 y tipo de archivo ELF](docs/evidence/reverse/screenshots/03_paso0-1_file_y_sha256_hashes.png)
+
+### Punto 2 · Nivel 1
+
+![Contraseña visible con strings](docs/evidence/reverse/screenshots/07_nivel1_strings_password_embebido.png)
+
+![Bandera obtenida en el nivel 1](docs/evidence/reverse/screenshots/09_nivel1_access_granted_flag.png)
+
+### Punto 3 · Nivel 2 con Ghidra
+
+![Función principal decompilada en Ghidra](docs/evidence/reverse/screenshots/15_nivel2_ghidra_main_decompilado.png)
+
+![Validación XOR analizada en Ghidra](docs/evidence/reverse/screenshots/16b_nivel2_ghidra_validate_key_renombrado_xor.png)
+
+![Bandera obtenida tras reconstruir la clave](docs/evidence/reverse/screenshots/18_nivel2_wsl_clave_valida_flag.png)
+
+### Punto 4 · Confirmación con GDB
+
+![GDB compara retornos 0 y 1](docs/evidence/reverse/screenshots/19_gdb_wsl_validate_key_retorno_0_vs_1.png)
+
+### Punto 5 · Boss Level stripped
+
+![Binario stripped importado en Ghidra](docs/evidence/reverse/screenshots/21_boss_ghidra_import_stripped_sin_simbolos.png)
+
+![Validación recuperada en Ghidra](docs/evidence/reverse/screenshots/25_boss_ghidra_validacion_recuperada_DAT_00402090_DAT_0040208b.png)
 ## Uso responsable de IA
 
 Se utilizó asistencia de IA como apoyo para revisar la redacción y organizar el análisis. Las conclusiones deben contrastarse con las capturas, los logs y la ejecución de las herramientas incluidas como evidencia.
