@@ -1,0 +1,28 @@
+$ gdb -q ./crackme_level2
+(gdb) set disassembly-flavor intel
+(gdb) set pagination off
+(gdb) break *0x4011b9
+Breakpoint 1 at 0x4011b9: file /mnt/data/reverse_fsi_lab/crackme_level2.c, line 15.
+(gdb) break *0x4011e7
+Breakpoint 2 at 0x4011e7: file /mnt/data/reverse_fsi_lab/crackme_level2.c, line 18.
+(gdb) run AAAAAAAAAAAAAAAAA
+
+Breakpoint 1, validate_key (candidate=0x7fffffff9956 'A' <repeats 17 times>) at /mnt/data/reverse_fsi_lab/crackme_level2.c:15
+(gdb) printf "i=%d  candidate[i]=0x%02x  k[i%%4]=0x%02x\n", *(long*)($rbp-0x10), $ecx, $eax & 0xff
+i=0  candidate[i]=0x41  k[i%4]=0x23
+(gdb) delete 1
+(gdb) continue
+
+Breakpoint 2, validate_key (candidate=0x7fffffff9956 'A' <repeats 17 times>) at /mnt/data/reverse_fsi_lab/crackme_level2.c:18
+(gdb) printf "score = 0x%x\n", *(unsigned int*)($rbp-0x4)
+score = 0x7f
+(gdb) finish
+0x00000000004012d2 in main (argc=2, argv=0x7fffffff9128) at /mnt/data/reverse_fsi_lab/crackme_level2.c:36
+Value returned is $1 = 0
+(gdb) info registers eax
+eax            0x0                 0
+(gdb) continue
+=== FDSI CrackMe Level 2 ===
+Hint: static + dynamic analysis.
+Invalid license.
+[Inferior 1 (process 532) exited with code 03]

@@ -1,0 +1,30 @@
+$ gdb -q ./crackme_level2_stripped
+(gdb) set disassembly-flavor intel
+(gdb) set pagination off
+(gdb) break validate_key
+Function "validate_key" not defined.
+Make breakpoint pending on future shared library load? (y or [n]) [answered N; input not from terminal]
+(gdb) break *0x401156
+Breakpoint 1 at 0x401156
+(gdb) break *0x4011e7
+Breakpoint 2 at 0x4011e7
+(gdb) run FDSI-REVERSE-2026
+
+Breakpoint 1, 0x0000000000401156 in ?? ()
+(gdb) x/s $rdi
+0x7fffffff994d:	"FDSI-REVERSE-2026"
+(gdb) continue
+
+Breakpoint 2, 0x00000000004011e7 in ?? ()
+(gdb) printf "score = 0x%x\n", *(unsigned int*)($rbp-0x4)
+score = 0x0
+(gdb) finish
+0x00000000004012d2 in ?? ()
+(gdb) info registers eax
+eax            0x1                 1
+(gdb) continue
+=== FDSI CrackMe Level 2 ===
+Hint: static + dynamic analysis.
+License accepted.
+FLAG{ghidra_plus_gdb}
+[Inferior 1 (process 552) exited normally]

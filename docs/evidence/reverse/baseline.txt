@@ -1,20 +1,29 @@
-===================================================================
-BASELINE FORENSE - INTEGRIDAD Y METADATOS DE EJECUTABLES
-Laboratorio No. 04 - Parte 2: Reverse Engineering CTF
-===================================================================
+# Baseline Forense de Binarios — Reverse Engineering CTF Lab
+# Fecha de generación: 2026-09-30T16:45:00Z
+# Entorno: WSL Linux x86-64 / PowerShell
 
-[+] 1. INTEGRIDAD CRIPTOGRÁFICA (SHA-256):
-61e980febe84b1003b5a3b641468e915b984f7fdd835be9828af54233f88c68c  crackme_level1
-8dc5931dfbf74d7371de9ca9ed8cc57bfe0af4521346202dcd1c701dd8b6f4e5  crackme_level2
-c8e638741272a87ee3b30fe8878898c1aa977e6a879a1ec0b271034b5bb9aed3  crackme_level2_stripped
+================================================================================
+1. VERIFICACIÓN FORMATO Y ARQUITECTURA (file)
+================================================================================
+$ file crackme_level1 crackme_level2 crackme_level2_stripped
 
-[+] 2. IDENTIFICACIÓN DE FORMATO Y ARQUITECTURA (file):
 crackme_level1:          ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=01c8816fe4b791d9ded9a73e62f8f443464716ba, for GNU/Linux 3.2.0, with debug_info, not stripped
 crackme_level2:          ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=3eb5b89d4b93c6773577b448cd1cc98400e2196b, for GNU/Linux 3.2.0, with debug_info, not stripped
 crackme_level2_stripped: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=df25a1fa020d404f3512421bfcf8c89b417e8554, for GNU/Linux 3.2.0, stripped
 
-[+] 3. CABECERAS ELF (readelf -h):
---- crackme_level1 ---
+================================================================================
+2. HASHEADO CRIPTOGRÁFICO DE INTEGRIDAD (sha256sum)
+================================================================================
+$ sha256sum crackme_level1 crackme_level2 crackme_level2_stripped
+
+61e980febe84b1003b5a3b641468e915b984f7fdd835be9828af54233f88c68c  crackme_level1
+8dc5931dfbf74d7371de9ca9ed8cc57bfe0af4521346202dcd1c701dd8b6f4e5  crackme_level2
+c8e638741272a87ee3b30fe8878898c1aa977e6a879a1ec0b271034b5bb9aed3  crackme_level2_stripped
+
+================================================================================
+3. INSPECCIÓN DE CABECERAS ELF (readelf -h)
+================================================================================
+--- Header: crackme_level1 ---
 ELF Header:
   Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00 
   Class:                             ELF64
@@ -35,7 +44,8 @@ ELF Header:
   Size of section headers:           64 (bytes)
   Number of section headers:         36
   Section header string table index: 35
---- crackme_level2 ---
+
+--- Header: crackme_level2 ---
 ELF Header:
   Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00 
   Class:                             ELF64
@@ -56,7 +66,8 @@ ELF Header:
   Size of section headers:           64 (bytes)
   Number of section headers:         36
   Section header string table index: 35
---- crackme_level2_stripped ---
+
+--- Header: crackme_level2_stripped ---
 ELF Header:
   Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00 
   Class:                             ELF64
@@ -77,3 +88,22 @@ ELF Header:
   Size of section headers:           64 (bytes)
   Number of section headers:         28
   Section header string table index: 27
+
+================================================================================
+4. ANÁLISIS
+================================================================================
+- Formato/arquitectura: ELF64, little endian, x86-64, tipo EXEC (no PIE), entry 0x401070.
+- Linking: dinámico (usa /lib64/ld-linux-x86-64.so.2 y libc).
+- Símbolos: level1 y level2 "not stripped" y "with debug_info" (conservan nombres de
+  funciones). level2_stripped está "stripped": pasa de 36 a 28 secciones porque
+  se eliminaron .symtab, .strtab y las secciones .debug_*.
+- ¿Por qué el hash? El SHA-256 identifica el archivo de forma única. Si coincide con
+  el publicado por el docente, todos analizamos exactamente el mismo binario, sin
+  corrupción ni modificaciones. Así los hallazgos son comparables y reproducibles.
+- Evidencia visual (screenshots/):
+    01_paso0_copia_binarios_fdsi-reverse.png       -> directorio ~/fdsi-reverse y copia de los 3 binarios
+    02_paso0_instalacion_binutils_gdb_file.png     -> instalación de binutils, gdb y file
+    03_paso0-1_file_y_sha256_hashes.png            -> file + sha256sum (hashes coinciden con la guía)
+    04_paso0_estructura_docs_evidence_reverse.png  -> docs/evidence/reverse/ creado en el repositorio
+    05_paso1_readelf_cabeceras_elf.png             -> readelf -h de crackme_level1 y crackme_level2
+- No se abrió ni se solicitó el código fuente de los crackmes (el paquete no lo incluye).

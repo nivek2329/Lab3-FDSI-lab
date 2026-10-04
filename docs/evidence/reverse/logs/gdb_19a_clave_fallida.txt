@@ -1,0 +1,42 @@
+$ gdb -q ./crackme_level2
+(gdb) set disassembly-flavor intel
+(gdb) set pagination off
+(gdb) break validate_key
+Breakpoint 1 at 0x401162: file /mnt/data/reverse_fsi_lab/crackme_level2.c, line 10.
+(gdb) break *0x401176
+Breakpoint 2 at 0x401176: file /mnt/data/reverse_fsi_lab/crackme_level2.c, line 11.
+(gdb) run AAAA
+
+Breakpoint 1, validate_key (candidate=0x7fffffff9963 "AAAA") at /mnt/data/reverse_fsi_lab/crackme_level2.c:10
+(gdb) x/s $rdi
+0x7fffffff9963:	"AAAA"
+(gdb) x/12i $pc
+=> 0x401162 <validate_key+12>:	mov    QWORD PTR [rbp-0x18],0x11
+   0x40116a <validate_key+20>:	mov    rax,QWORD PTR [rbp-0x28]
+   0x40116e <validate_key+24>:	mov    rdi,rax
+   0x401171 <validate_key+27>:	call   0x401050 <strlen@plt>
+   0x401176 <validate_key+32>:	cmp    QWORD PTR [rbp-0x18],rax
+   0x40117a <validate_key+36>:	je     0x401183 <validate_key+45>
+   0x40117c <validate_key+38>:	mov    eax,0x0
+   0x401181 <validate_key+43>:	jmp    0x4011f1 <validate_key+155>
+   0x401183 <validate_key+45>:	mov    DWORD PTR [rbp-0x4],0x0
+   0x40118a <validate_key+52>:	mov    QWORD PTR [rbp-0x10],0x0
+   0x401192 <validate_key+60>:	jmp    0x4011dd <validate_key+135>
+   0x401194 <validate_key+62>:	mov    rdx,QWORD PTR [rbp-0x28]
+(gdb) continue
+
+Breakpoint 2, 0x0000000000401176 in validate_key (candidate=0x7fffffff9963 "AAAA") at /mnt/data/reverse_fsi_lab/crackme_level2.c:11
+(gdb) info registers rax
+rax            0x4                 4
+(gdb) x/gx $rbp-0x18
+0x7fffffff8fd8:	0x0000000000000011
+(gdb) finish
+0x00000000004012d2 in main (argc=2, argv=0x7fffffff9138) at /mnt/data/reverse_fsi_lab/crackme_level2.c:36
+Value returned is $1 = 0
+(gdb) info registers eax
+eax            0x0                 0
+(gdb) continue
+=== FDSI CrackMe Level 2 ===
+Hint: static + dynamic analysis.
+Invalid license.
+[Inferior 1 (process 522) exited with code 03]

@@ -1,0 +1,46 @@
+$ file crackme_level2_stripped
+crackme_level2_stripped: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=df25a1fa020d404f3512421bfcf8c89b417e8554, for GNU/Linux 3.2.0, stripped
+
+$ nm crackme_level2_stripped
+nm: crackme_level2_stripped: no symbols
+
+$ nm -D crackme_level2_stripped
+                 w __gmon_start__
+                 U __libc_start_main@GLIBC_2.34
+                 U printf@GLIBC_2.2.5
+                 U putchar@GLIBC_2.2.5
+                 U puts@GLIBC_2.2.5
+                 U strlen@GLIBC_2.2.5
+
+$ readelf -S (secciones) diff
+29,36d28
+< .debug_aranges
+< .debug_info
+< .debug_abbrev
+< .debug_line
+< .debug_str
+< .debug_line_str
+< .symtab
+< .strtab
+
+$ strings -n 5 crackme_level2_stripped | head -20
+T/lib64/ld-linux-x86-64.so.2
+putchar
+strlen
+__libc_start_main
+printf
+libc.so.6
+GLIBC_2.34
+GLIBC_2.2.5
+__gmon_start__
+H=0@@
+q{vpLP_^H
+SEVhG[BDH
+[BDhPSUJH
+=== FDSI CrackMe Level 2 ===
+Hint: static + dynamic analysis.
+Uso: %s <license-key>
+License accepted.
+Invalid license.
+;*3$"
+GCC: (Debian 14.2.0-19) 14.2.0

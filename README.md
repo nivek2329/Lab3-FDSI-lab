@@ -56,16 +56,20 @@ Lab3-FDSI-lab/
 ├── nginx/                      # Configuración de servidor web
 ├── diagrams/                   # Diagramas de Flujo de Datos
 ├── docs/evidence/reverse/      # Evidencias de Ingeniería Inversa (Parte 2)
-│   ├── baseline.txt            # Hashes SHA-256 e identificación ELF
-│   ├── level1.md               # Reconocimiento y strings
-│   ├── level2.md               # Reconstrucción algorítmica y Ghidra
-│   ├── gdb.md                  # Depuración dinámica y confirmación en tiempo de ejecución
-│   └── screenshots/            # Capturas de soporte
+│   ├── README.md               # Índice de evidencia por punto
+│   ├── baseline.txt            # Pasos 0 y 1: hashes SHA-256 e identificación ELF
+│   ├── level1.md               # Nivel 1: reconocimiento y strings
+│   ├── level2.md               # Nivel 2: reconstrucción algorítmica con Ghidra
+│   ├── gdb.md                  # Confirmación dinámica con GDB
+│   ├── boss.md                 # Boss Level: binario stripped
+│   ├── preguntas-analisis.md   # Preguntas de análisis
+│   ├── logs/                   # Salidas de terminal y GDB (con README)
+│   └── screenshots/            # Capturas de soporte (con README)
 ├── evidence/                   # Evidencias de ejecución
 │   ├── red/                    # Escaneos y pruebas ofensivas
 │   └── blue/                   # Logs y capturas de red
 ├── reports/zap-passive/        # Reporte exportado de ZAP
-├── reverse-analysis.md         # Respuestas a las preguntas de análisis de Ingeniería Inversa
+├── reverse-analysis.md         # Consolidado de Ingeniería Inversa, Boss y guion del cierre
 ├── risk-register.md            # Registro de riesgos y mitigaciones
 ├── stride-analysis.md          # Análisis de amenazas
 └── README.md                   # Este documento
@@ -86,11 +90,20 @@ Ruta de laboratorio local orientada a la ingeniería inversa de binarios compila
 | **Boss Level** | `crackme_level2_stripped` | `FDSI-REVERSE-2026` | `FLAG{ghidra_plus_gdb}` | Análisis de binario sin símbolos mediante referencias cruzadas (XREFs) |
 
 ### Documentación de Evidencias
-* **[Baseline Forense](docs/evidence/reverse/baseline.txt):** Hashes SHA-256 oficiales, tipos de archivo y cabeceras ELF.
-* **[Nivel 1 - Recon](docs/evidence/reverse/level1.md):** Identificación de secretos embebidos en texto claro.
-* **[Nivel 2 - Decompile](docs/evidence/reverse/level2.md):** Reconstrucción del algoritmo de validación XOR y pseudocódigo propio.
-* **[Confirmación Dinámica GDB](docs/evidence/reverse/gdb.md):** Sesión de depuración con registros `RAX`/`RDI` y bifurcaciones condicionales.
-* **[Preguntas de Análisis](reverse-analysis.md):** Respuestas técnicas a los 7 interrogantes planteados en la guía docente.
+Índice completo por punto de la guía: [`docs/evidence/reverse/README.md`](docs/evidence/reverse/README.md)
+
+| Punto de la guía | Documento |
+| :--- | :--- |
+| 0-1. Preparación y baseline forense | [`baseline.txt`](docs/evidence/reverse/baseline.txt) |
+| 2. Nivel 1 - Recon | [`level1.md`](docs/evidence/reverse/level1.md) |
+| 3. Nivel 2 - Ghidra | [`level2.md`](docs/evidence/reverse/level2.md) |
+| 4. Confirmación dinámica GDB | [`gdb.md`](docs/evidence/reverse/gdb.md) |
+| 5. Boss Level (stripped) | [`boss.md`](docs/evidence/reverse/boss.md) |
+| Preguntas de análisis | [`preguntas-analisis.md`](docs/evidence/reverse/preguntas-analisis.md) |
+| Consolidado y guion del cierre de 3 minutos | [`reverse-analysis.md`](reverse-analysis.md) |
+
+* **Capturas:** [`docs/evidence/reverse/screenshots/`](docs/evidence/reverse/screenshots/) (índice en su README): Ghidra y terminal WSL de cada paso.
+* **Logs:** [`docs/evidence/reverse/logs/`](docs/evidence/reverse/logs/): salidas completas de terminal y sesiones GDB.
 
 ---
 

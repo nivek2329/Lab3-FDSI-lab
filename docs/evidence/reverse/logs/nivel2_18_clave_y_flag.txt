@@ -1,0 +1,11 @@
+$ python3 -c "k=bytes.fromhex('2351176a');e=bytes.fromhex('651544230e03523c6603442f0e63275815');print(bytes(e[i]^k[i%4] for i in range(17)).decode())"
+FDSI-REVERSE-2026
+$ ./crackme_level2 AAAA
+=== FDSI CrackMe Level 2 ===
+Hint: static + dynamic analysis.
+Invalid license.
+$ ./crackme_level2 FDSI-REVERSE-2026
+=== FDSI CrackMe Level 2 ===
+Hint: static + dynamic analysis.
+License accepted.
+FLAG{ghidra_plus_gdb}
