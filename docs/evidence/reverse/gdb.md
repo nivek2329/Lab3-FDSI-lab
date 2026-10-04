@@ -21,6 +21,14 @@ gdb -q ./crackme_level2 -ex "break validate_key" -ex "run AAAA" -ex "finish" \
 El retorno de `validate_key` cambia de **0 a 1** solo con la clave reconstruida, y `main` en `0x4012d2` (`test eax,eax`) decide con ese valor.
 Evidencia: `screenshots/19_gdb_wsl_validate_key_retorno_0_vs_1.png` · `screenshots/18_nivel2_wsl_clave_valida_flag.png`
 
+![GDB: retorno 0 para clave errónea y 1 para válida](screenshots/19_gdb_wsl_validate_key_retorno_0_vs_1.png)
+
+![Nivel 2: clave válida y FLAG en WSL](screenshots/18_nivel2_wsl_clave_valida_flag.png)
+
+![GDB: desensamblado de validate_key](screenshots/19b_gdb_wsl_disassemble_validate_key.png)
+
+![GDB: registros, retornos y FLAG](screenshots/19c_gdb_wsl_registros_retorno_0_vs_1_flag.png)
+
 Las secciones siguientes amplían la sesión con registros y memoria (longitud, operandos del XOR, acumulador `score`).
 
 ---
@@ -146,6 +154,8 @@ Sin símbolos, GDB muestra `?? ()` en lugar de nombres, pero el código máquina
 
 Misma prueba en WSL: `Function "validate_key" not defined`, `Breakpoint 2, 0x401156 in ?? ()`, `x/s $rdi` = `"FDSI-REVERSE-2026"`, `eax 0x1`, FLAG.
 Evidencia: `screenshots/20c_boss_wsl_gdb_break_por_direccion_flag.png`
+
+![Boss: breakpoint por dirección y FLAG en GDB](screenshots/20c_boss_wsl_gdb_break_por_direccion_flag.png)
 
 ---
 

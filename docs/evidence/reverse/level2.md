@@ -38,6 +38,10 @@ El programa recibe una **license-key** y responde `License accepted.` o `Invalid
 
 Evidencia: `screenshots/10_nivel2_ejecucion_invalid_y_strings.png` · `screenshots/11_nivel2_objdump_rodata_bytes_no_legibles.png`
 
+![Nivel 2: ejecución inicial y resultado de strings](screenshots/10_nivel2_ejecucion_invalid_y_strings.png)
+
+![Nivel 2: bytes ofuscados en rodata](screenshots/11_nivel2_objdump_rodata_bytes_no_legibles.png)
+
 ## 3. Hipótesis
 
 > La clave no está en texto plano. Está **transformada** y guardada como bytes en `.rodata`, y una función
@@ -51,6 +55,14 @@ Evidencia: `screenshots/10_nivel2_ejecucion_invalid_y_strings.png` · `screensho
 - Se aceptó el análisis automático.
 
 Evidencia: `screenshots/12_nivel2_ghidra_iniciado.png` · `13_nivel2_ghidra_proyecto_nonshared.png` · `14a_nivel2_ghidra_import_elf_x86-64.png` · `14b_nivel2_ghidra_import_results_summary.png`
+
+![Nivel 2: Ghidra abierto](screenshots/12_nivel2_ghidra_iniciado.png)
+
+![Nivel 2: proyecto Non-Shared creado](screenshots/13_nivel2_ghidra_proyecto_nonshared.png)
+
+![Nivel 2: importación ELF en Ghidra](screenshots/14a_nivel2_ghidra_import_elf_x86-64.png)
+
+![Nivel 2: resumen del análisis en Ghidra](screenshots/14b_nivel2_ghidra_import_results_summary.png)
 
 ### 4.2 `main`: ¿quién decide?
 
@@ -68,6 +80,8 @@ if (argc == 2) {
 
 La decisión depende **solo** del valor de retorno de `validate_key(argv[1])`: distinto de 0 significa válida.
 Evidencia: `screenshots/15_nivel2_ghidra_main_decompilado.png`
+
+![Nivel 2: función main decompilada](screenshots/15_nivel2_ghidra_main_decompilado.png)
 
 ### 4.3 `validate_key`: la validación
 
@@ -90,11 +104,24 @@ return uVar1;
 
 Evidencia:
 - `screenshots/16a_nivel2_ghidra_validate_key_original.png`: decompilador antes de renombrar.
+
+  ![Nivel 2: validate_key original en Ghidra](screenshots/16a_nivel2_ghidra_validate_key_original.png)
 - `screenshots/16b_nivel2_ghidra_validate_key_renombrado_xor.png`: renombres `key_len`/`is_valid`; en el Listing se ven las instrucciones `XOR` (`004011b9`, `004011cf`), `OR` (`004011d5`) y `CMP`/`SETZ` (`004011e7`) que corresponden al pseudocódigo.
+
+  ![Nivel 2: validate_key y operaciones XOR](screenshots/16b_nivel2_ghidra_validate_key_renombrado_xor.png)
 - `screenshots/16c_nivel2_ghidra_validate_key_comentario_xor.png`: comentario de análisis sobre la línea del XOR.
+
+  ![Nivel 2: comentario de análisis XOR](screenshots/16c_nivel2_ghidra_validate_key_comentario_xor.png)
 - `screenshots/17a_nivel2_ghidra_listing_k_23-51-17-6a.png`: `k.1` en `0x0040208b` = `23 51 17 6A`.
+
+  ![Nivel 2: bytes del arreglo k en el Listing](screenshots/17a_nivel2_ghidra_listing_k_23-51-17-6a.png)
 - `screenshots/17b_nivel2_ghidra_listing_expected_17_bytes.png`: `expected.0` en `0x00402090`, los 17 bytes `[0]..[16]`.
+
+  ![Nivel 2: bytes del arreglo expected en el Listing](screenshots/17b_nivel2_ghidra_listing_expected_17_bytes.png)
 - `screenshots/18b_nivel2_wsl_objdump_validate_key_parte1.png` y `18c_..._parte2.png`: `objdump -d -M intel --disassemble=validate_key` en WSL, donde se ven las mismas instrucciones fuera de Ghidra (`mov [rbp-0x18],0x11`, `call strlen`, `and eax,0x3`, `lea ... <k.1>`, `xor`, `lea ... <expected.0>`, `or`, `sete`).
+
+  ![Nivel 2: desensamblado de validate_key, parte 1](screenshots/18b_nivel2_wsl_objdump_validate_key_parte1.png)
+  ![Nivel 2: desensamblado de validate_key, parte 2](screenshots/18c_nivel2_wsl_objdump_validate_key_parte2.png)
 
 | Elemento | Hallazgo |
 |---|---|
@@ -104,7 +131,7 @@ Evidencia:
 | **Transformación por byte** | `transformed = candidate[i] XOR k[i % 4]` |
 | **Condición de éxito** | `score` acumula con OR cada diferencia `expected[i] XOR transformed`. Es válida solo si `score == 0`, es decir, si **todos** los bytes coinciden |
 
-Detalle: el uso de OR acumulado (`score |= ...`) en lugar de salir en el primer byte distinto hace que la función recorra siempre los 17 bytes. Así no filtra por tiempo cuántos caracteres se acertaron.
+Detalle: el uso de OR acumulado (`score |= ...`) en lugar de salir en el primer byte distinto hace que la función recorra siempre los 17 bytes. Esto evita salir al primer byte distinto, pero no basta para afirmar que toda la función sea de tiempo constante.
 
 ## 5. Pseudocódigo propio
 
@@ -172,6 +199,8 @@ FLAG{ghidra_plus_gdb}
 
 La clave reconstruida estáticamente fue aceptada, lo que confirma la hipótesis. La demostración paso a paso con GDB está en [`gdb.md`](gdb.md).
 Evidencia: `screenshots/18_nivel2_wsl_clave_valida_flag.png` (ejecución en WSL Ubuntu del equipo) · `logs/nivel2_18_clave_y_flag.txt`
+
+![Nivel 2: clave válida y FLAG en WSL](screenshots/18_nivel2_wsl_clave_valida_flag.png)
 
 ## 8. Lección de desarrollo seguro
 

@@ -6,7 +6,7 @@ Repositorio de entrega del laboratorio 4 de Fundamentos de Seguridad Informátic
 
 - [`FDSI_Guia2_Reverse_Engineering_ESTUDIANTES/`](FDSI_Guia2_Reverse_Engineering_ESTUDIANTES/): binarios y guía de la actividad.
 - [`docs/evidence/reverse/README.md`](docs/evidence/reverse/README.md): índice de evidencias y resultados por punto.
-- [`docs/evidence/reverse/baseline.txt`](docs/evidence/reverse/baseline.txt): preparación, identificación y hashes de los binarios.
+- [`baseline.md`](docs/evidence/reverse/baseline.md) · [`baseline.txt`](docs/evidence/reverse/baseline.txt): preparación, capturas de baseline, identificación y hashes ([guía visual](docs/evidence/reverse/baseline.md), [registro completo](docs/evidence/reverse/baseline.txt)).
 - [`docs/evidence/reverse/level1.md`](docs/evidence/reverse/level1.md): análisis del nivel 1.
 - [`docs/evidence/reverse/level2.md`](docs/evidence/reverse/level2.md): análisis del nivel 2 en Ghidra.
 - [`docs/evidence/reverse/gdb.md`](docs/evidence/reverse/gdb.md): comprobación dinámica con GDB.

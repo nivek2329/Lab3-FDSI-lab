@@ -23,6 +23,8 @@ Access denied.
 El programa recibe **un argumento** (`<password>`) y responde con un mensaje de éxito o de fallo.
 Evidencia: `screenshots/06_nivel1_ejecucion_access_denied.png`
 
+![Nivel 1: ejecución con contraseña incorrecta](screenshots/06_nivel1_ejecucion_access_denied.png)
+
 ## 2. Hipótesis
 
 > Si el programa valida la contraseña comparando cadenas, la contraseña debe estar almacenada en el binario
@@ -57,6 +59,8 @@ Hallazgos:
 
 Evidencia: `screenshots/07_nivel1_strings_password_embebido.png`
 
+![Nivel 1: contraseña descubierta con strings](screenshots/07_nivel1_strings_password_embebido.png)
+
 ### 3.2 `objdump -d -M intel --disassemble=main crackme_level1`
 
 | Dirección | Instrucción | Significado |
@@ -72,6 +76,8 @@ Evidencia: `screenshots/07_nivel1_strings_password_embebido.png`
 
 Evidencia: `screenshots/08a_nivel1_objdump_main_strcmp.png`
 
+![Nivel 1: comparación observada en main con objdump](screenshots/08a_nivel1_objdump_main_strcmp.png)
+
 ### 3.3 `objdump -s -j .rodata crackme_level1`
 
 ```text
@@ -85,6 +91,8 @@ Evidencia: `screenshots/08a_nivel1_objdump_main_strcmp.png`
 La dirección `0x402004` (usada por el `lea` de `main`) contiene exactamente `REDTEAM-101`.
 Esto conecta la cadena de `strings` con el argumento que recibe `strcmp`.
 Evidencia: `screenshots/08b_nivel1_objdump_rodata_redteam101.png`
+
+![Nivel 1: contraseña localizada en rodata](screenshots/08b_nivel1_objdump_rodata_redteam101.png)
 
 ## 4. Lógica reconstruida (pseudocódigo propio)
 
@@ -119,6 +127,8 @@ FLAG{strings_are_evidence}
 
 La hipótesis quedó confirmada.
 Evidencia: `screenshots/09_nivel1_access_granted_flag.png`
+
+![Nivel 1: acceso válido y FLAG obtenida](screenshots/09_nivel1_access_granted_flag.png)
 
 ## 6. ¿Por qué `strings` puede revelar secretos embebidos?
 

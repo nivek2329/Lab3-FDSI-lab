@@ -4,8 +4,8 @@
 
 | Punto de la guía | Documento | Resultado |
 |---|---|---|
-| 0. Preparación | [`baseline.txt`](baseline.txt) | Entorno WSL, herramientas y copia de binarios |
-| 1. Baseline forense | [`baseline.txt`](baseline.txt) | ELF64 x86-64 dinámicos; hashes verificados |
+| 0. Preparación | [`baseline.md`](baseline.md) | Entorno WSL, herramientas y copia de binarios |
+| 1. Baseline forense | [`baseline.md`](baseline.md) | ELF64 x86-64 dinámicos; hashes verificados |
 | 2. Nivel 1 | [`level1.md`](level1.md) | `FLAG{strings_are_evidence}` |
 | 3. Nivel 2 (Ghidra) | [`level2.md`](level2.md) | `FDSI-REVERSE-2026` · `FLAG{ghidra_plus_gdb}` |
 | 4. Confirmación con GDB | [`gdb.md`](gdb.md) | Retornos 0 y 1 comprobados |
