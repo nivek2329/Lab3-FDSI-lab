@@ -111,8 +111,14 @@ $$\text{Alcance y Línea Base} \longrightarrow \text{SAST} \longrightarrow \text
 - **Pasos de validación en entorno propio:**
   Auditoría estática mediante Semgrep:
   semgrep scan --config p/owasp-top-ten --json --output semgrep.json
-- **Recomendación y medida correctiva:**
-  Fijar las referencias a hashes inmutables SHA-1 de 40 caracteres (ej. uses: actions/checkout@8ade135a...) y activar permisos de mínimo privilegio en el token del workflow (permissions: contents: read).
+- **Corrección implementada:**
+  Se reemplazaron todos los tags mutables por hashes SHA-1 inmutables oficiales de 40 caracteres:
+  - ctions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  (# v4.2.2)
+  - ctions/setup-python@42375524e23c412d93fb67b49958b491fce71c38  (# v5.4.0)
+  - ctions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1  (# v4.6.1)
+  - gitleaks/gitleaks-action@e0c47f4f8be36e29cdc102c57e68cb5cbf0e8d1e  (# v3)
+- **Resultado del reescaneo:**
+  Reejecución de Semgrep con 0 hallazgos (0 advertencias, 0 errores) sobre los 38 archivos evaluados.
 
 ## Reflexión final
 1. **Alcance y límites de las herramientas automáticas:**

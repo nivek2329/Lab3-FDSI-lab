@@ -25,7 +25,7 @@
 | ID | Categoría | Descripción sin secretos | Riesgo | Archivo/ruta | Cambio propuesto | Estado |
 |---|---|---|---|---|---|---|
 | F-01 | A05: Security Misconfiguration | Ausencia de cabeceras de seguridad HTTP esenciales (CSP, X-Frame-Options, X-Content-Type-Options, HSTS, Referrer-Policy) | Medio | `nginx/netops-portal.conf`, `app/*.html` | Configurar directivas `add_header` en Nginx y meta tags en HTML | Corregido |
-| F-02 | A06: Vulnerable and Outdated Components | Uso de referencias mutables de acciones en GitHub Actions (`@v4`, `@v5`) susceptible a ataques de cadena de suministro | Bajo | `.github/workflows/seguridad-estatica.yml`, `.github/workflows/dast-staging.yml` | Fijar dependencias o restringir permisos de workflow | En seguimiento |
+| F-02 | A06: Vulnerable and Outdated Components | Uso de referencias mutables de acciones en GitHub Actions (`@v4`, `@v5`) susceptible a ataques de cadena de suministro | Bajo | `.github/workflows/seguridad-estatica.yml`, `.github/workflows/dast-staging.yml` | Fijar dependencias o restringir permisos de workflow | Corregido |
 | F-03 | A05: Information Disclosure | Divulgación de información de versión del servidor web Nginx mediante cabecera `Server` (`server_tokens on`) | Bajo | `nginx/netops-portal.conf` | Deshabilitar directiva `server_tokens off;` | Corregido |
 
 ## 4. Validación antes y después
