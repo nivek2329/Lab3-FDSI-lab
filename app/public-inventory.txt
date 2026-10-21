@@ -1,0 +1,18 @@
+# ══════════════════════════════════════════════════════════════════
+# INVENTARIO DE DISPOSITIVOS DE RED — ENTORNO LAB (FICTICIO)
+# Generado: 2026-09-02T17:00:00Z
+# Clasificación: USO ACADÉMICO — DATOS COMPLETAMENTE FICTICIOS
+# Propietario: Blue Team — Grupo G06
+# ══════════════════════════════════════════════════════════════════
+
+DEVICE_ID    | TYPE      | HOSTNAME            | IP_MGMT     | OS_VERSION           | LOCATION   | STATUS
+-------------|-----------|---------------------|-------------|----------------------|------------|--------
+NET-FW-01    | Firewall  | fw-perimetro-lab    | 10.0.1.1    | FortiOS 7.4.1-LAB    | DC-Norte   | Active
+NET-FW-02    | Firewall  | fw-dmz-lab          | 10.0.1.2    | pfSense 2.7-LAB      | DC-Norte   | Active
+NET-RT-01    | Router    | rt-core-lab         | 10.0.2.1    | IOS-XE 17.9-LAB      | DC-Norte   | Active
+NET-RT-02    | Router    | rt-wan-lab          | 10.0.2.2    | IOS-XE 17.9-LAB      | DC-Sur     | Standby
+NET-SW-01    | Switch    | sw-acceso-lab       | 10.0.3.1    | IOS 15.2-LAB         | DC-Norte   | Active
+NET-SW-02    | Switch    | sw-distribucion-lab | 10.0.3.2    | NX-OS 10.3-LAB       | DC-Sur     | Active
+
+# Nota: Todas las IPs y hostnames son ficticios para uso exclusivo del laboratorio.
+# No corresponden a equipos reales en producción.

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Auditoría</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container" style="padding-top: 0; padding-bottom: 0;">
+            <div class="navbar-brand">NetOps Secure Execution Portal</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="public-inventory.txt">Inventario</a></li>
+                <li><a href="scripts-catalog.html">Scripts</a></li>
+                <li><a href="simulate.html">Simulador</a></li>
+                <li><a href="audit-log.html">Auditoría</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2>Registro de Auditoría</h2>
+        <p style="color: #8b949e; margin-bottom: 2rem;">Historial de ejecuciones simuladas</p>
+        
+        <div class="alert alert-info">
+            <strong>Trazabilidad:</strong> Cada ejecución genera un hash criptográfico único (ficticio) para garantizar la inmutabilidad de las acciones según los requisitos del Lab 3.
+        </div>
+
+        <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: flex-end;">
+            <button class="btn btn-primary" onclick="loadAuditLog()">Actualizar Registro</button>
+            <button class="btn" onclick="clearAuditLog()" style="color: var(--danger); border-color: rgba(248, 81, 73, 0.4);">Borrar Historial (Reset)</button>
+        </div>
+
+        <div style="overflow-x: auto;">
+            <table id="auditTable">
+                <thead>
+                    <tr>
+                        <th>Timestamp (UTC)</th>
+                        <th>Operador</th>
+                        <th>Dispositivo</th>
+                        <th>Script</th>
+                        <th>Estado</th>
+                        <th>Hash Evidencia</th>
+                    </tr>
+                </thead>
+                <tbody id="auditBody">
+                    <!-- Filas generadas por JS -->
+                </tbody>
+            </table>
+        </div>
+        <p id="emptyMessage" style="display: none; text-align: center; color: #8b949e; padding: 2rem;">No hay registros de ejecución. Utilice el <a href="simulate.html">Simulador</a> para generar entradas.</p>
+    </div>
+
+    <footer>
+        <div class="container" style="padding: 0;">
+            <p>Grupo G06 | Kevin Andrey Ángel Acevedo (Blue Team) | Sergio Daniel Buitrago Suancha (Red Team)</p>
+            <p>Fundamentos de Seguridad de la Información (FDSI) 2026-2</p>
+        </div>
+    </footer>
+
+    <script>
+        function loadAuditLog() {
+            const tbody = document.getElementById('auditBody');
+            const emptyMsg = document.getElementById('emptyMessage');
+            const table = document.getElementById('auditTable');
+            
+            let auditLog = JSON.parse(localStorage.getItem('netops_audit_log') || '[]');
+            
+            tbody.innerHTML = '';
+            
+            if (auditLog.length === 0) {
+                table.style.display = 'none';
+                emptyMsg.style.display = 'block';
+                return;
+            }
+            
+            table.style.display = 'table';
+            emptyMsg.style.display = 'none';
+            
+            auditLog.forEach(entry => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td style="font-family: monospace; font-size: 0.9em; color: #8b949e;">${entry.timestamp}</td>
+                    <td><strong>${entry.operator}</strong></td>
+                    <td><span class="badge badge-active">${entry.device}</span></td>
+                    <td><code>${entry.script}</code></td>
+                    <td><span class="badge badge-approved">${entry.status}</span></td>
+                    <td style="font-family: monospace; font-size: 0.85em; color: #d29922;">${entry.hash}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function clearAuditLog() {
+            if (confirm('¿Está seguro de que desea borrar todo el historial de auditoría?')) {
+                localStorage.removeItem('netops_audit_log');
+                loadAuditLog();
+            }
+        }
+
+        // Cargar al iniciar
+        window.onload = loadAuditLog;
+    </script>
+</body>
+</html>
