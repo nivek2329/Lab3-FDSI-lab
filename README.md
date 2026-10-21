@@ -79,6 +79,11 @@ Integración de controles automáticos de seguridad en GitHub Actions para el pr
 - 🎯 **Pentesting controlado:** Validación de Clickjacking y falta de cabeceras de seguridad.
 - 🛠️ **Remediación:** Endurecimiento de configuración Nginx (`nginx/netops-portal.conf`) y cabeceras CSP/nosniff en frontend HTML.
 
+### Evidencias Visuales de Seguridad
+![Validación de Checks en Pull Request](docs/evidence/appsec/01_pull_request_all_checks_passed.png)
+
+![Tablero Interactivo AppSec Lab (8 de 8 completado)](docs/evidence/appsec/02_tablero_interactivo_8_etapas.png)
+
 ### Documentación de Seguridad
 - 📄 [Informe de seguridad (Línea Base y Gestión)](docs/SECURITY.md)
 - 📋 [Reporte técnico de hallazgos y remediación](docs/REPORTE_HALLAZGOS.md)

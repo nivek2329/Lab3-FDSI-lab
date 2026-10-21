@@ -18,6 +18,9 @@
 | Dependabot | SCA | 2026-10-21 | Configurado en Settings del repositorio; monitoreo de componentes de terceros | Pestaña Security → Dependabot alerts |
 | OWASP ZAP Baseline | DAST pasivo | 2026-10-21 | Identificación de cabeceras de seguridad faltantes (CSP, X-Frame-Options, X-Content-Type-Options) y fuga de versión de Nginx | Workflow `dast-staging.yml` / Informe ZAP |
 
+### Evidencia de Workflows de Seguridad en GitHub Actions
+![Workflows exitosos de Semgrep y Gitleaks](evidence/appsec/03_github_actions_workflows_verdes.png)
+
 ## 3. Hallazgos y gestión
 | ID | Categoría | Descripción sin secretos | Riesgo | Archivo/ruta | Cambio propuesto | Estado |
 |---|---|---|---|---|---|---|
@@ -41,6 +44,9 @@
 - **Pull request con corrección:**
   - Rama `security/lab-fsi` hacia `laboratorio-4`.
   - Commits de remediación: endurecimiento de `nginx/netops-portal.conf` y páginas de la aplicación.
+  - Validación de pipelines aprobada (4 checks en verde):
+    
+    ![Validación de Checks en Pull Request](evidence/appsec/01_pull_request_all_checks_passed.png)
 - **Evidencia de reescaneo:**
   - Petición HTTP post-remediación: `curl -I http://localhost:8080/`
     ```http
