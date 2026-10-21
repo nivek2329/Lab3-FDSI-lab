@@ -91,6 +91,29 @@ $$\text{Alcance y Línea Base} \longrightarrow \text{SAST} \longrightarrow \text
 
 ---
 
+
+---
+
+## Hallazgo F-03
+- **Título:** Uso de Referencias Mutables en Acciones de CI/CD (Supply Chain Security)
+- **Categoría OWASP/CWE:** OWASP Top 10:2021 — A06: Vulnerable and Outdated Components / CWE-829: Inclusion of Functionality from Untrusted Control Sphere.
+- **Severidad y justificación:** **Medio (Semgrep: WARNING / CVSS 4.5)**. El uso de tags mutables (@v4, @v5) en acciones de GitHub (ctions/checkout@v4, ctions/upload-artifact@v4, etc.) permite que un tercero malicioso que comprometa la cuenta del autor de la acción redirija el tag a un commit malicioso, inyectando código en el runner de compilación.
+- **Evidencia identificada por el escáner SAST (Semgrep):**
+  Regla: yaml.github-actions.security.github-actions-mutable-action-tag (6 ocurrencias detectadas):
+  1. .github/workflows/dast-staging.yml (Línea 33): uses: actions/upload-artifact@v4
+  2. .github/workflows/seguridad-estatica.yml (Línea 14): uses: actions/checkout@v4
+  3. .github/workflows/seguridad-estatica.yml (Línea 15): uses: actions/setup-python@v5
+  4. .github/workflows/seguridad-estatica.yml (Línea 24): uses: actions/upload-artifact@v4
+  5. .github/workflows/seguridad-estatica.yml (Línea 33): uses: actions/checkout@v4
+  6. .github/workflows/seguridad-estatica.yml (Línea 37): uses: gitleaks/gitleaks-action@v3
+- **Impacto en confidencialidad, integridad o disponibilidad:**
+  - **Integridad:** Ejecución no autorizada de comandos en el pipeline CI/CD si la dependencia aguas arriba es vulnerada.
+- **Pasos de validación en entorno propio:**
+  Auditoría estática mediante Semgrep:
+  semgrep scan --config p/owasp-top-ten --json --output semgrep.json
+- **Recomendación y medida correctiva:**
+  Fijar las referencias a hashes inmutables SHA-1 de 40 caracteres (ej. uses: actions/checkout@8ade135a...) y activar permisos de mínimo privilegio en el token del workflow (permissions: contents: read).
+
 ## Reflexión final
 1. **Alcance y límites de las herramientas automáticas:**
    - **Semgrep** demostró ser una herramienta excepcionalmente ágil para detectar riesgos estáticos de infraestructura como código (IaC) y patrones de seguridad en flujos CI/CD (`.github/workflows`), completando su análisis en pocos segundos.
