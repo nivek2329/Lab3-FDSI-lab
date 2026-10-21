@@ -3,6 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+
     <title>Registro de Auditoría</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -61,6 +64,11 @@
     </footer>
 
     <script>
+                function escapeHTML(str) {
+            const div = document.createElement('div');
+            div.textContent = str || '';
+            return div.innerHTML;
+        }
         function loadAuditLog() {
             const tbody = document.getElementById('auditBody');
             const emptyMsg = document.getElementById('emptyMessage');
@@ -83,7 +91,7 @@
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td style="font-family: monospace; font-size: 0.9em; color: #8b949e;">${entry.timestamp}</td>
-                    <td><strong>${entry.operator}</strong></td>
+                    <td><strong>${escapeHTML(entry.operator)}</strong></td>
                     <td><span class="badge badge-active">${entry.device}</span></td>
                     <td><code>${entry.script}</code></td>
                     <td><span class="badge badge-approved">${entry.status}</span></td>
