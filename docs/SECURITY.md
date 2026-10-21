@@ -6,7 +6,7 @@
 - **Rama de trabajo del laboratorio:** `security/lab-fsi`
 - **Proyecto:** NetOps Secure Execution Portal (HTML/CSS/JS + Nginx)
 - **Tecnología:** Servidor web Nginx, Frontend HTML5/CSS3/JavaScript vanilla, CI/CD GitHub Actions
-- **Responsables / autorización:** Kevin Andrey Ángel Acevedo (Blue Team), Sergio Daniel Buitrago Suancha (Red Team) — Grupo G06, Fundamentos de Seguridad de la Información (FDSI) 2026-2.
+- **Responsables / autorización:** Kevin Andrey Ángel Acevedo (Blue Team), Sergio Daniel Buitrago Suancha (Red Team), Daniel Julian Peña Bonilla (Red Team) — Grupo G06, Fundamentos de Seguridad de la Información (FDSI) 2026-2.
 - **URL de staging propio (si aplica):** Staging local en contenedor / servidor de pruebas aislado en entorno no productivo (`http://localhost:8080`).
 - **Fuera de alcance:** Sistemas de producción, servicios de terceros, infraestructura institucional no autorizada, credenciales reales, ataques de denegación de servicio (DoS/DDoS) y pruebas destructivas.
 

@@ -1,7 +1,7 @@
 # Informe técnico de hallazgos
 
 **Proyecto:** NetOps Secure Execution Portal  
-**Integrantes:** Kevin Andrey Ángel Acevedo (Blue Team), Sergio Daniel Buitrago Suancha (Red Team)  
+**Integrantes:** Kevin Andrey Ángel Acevedo (Blue Team), Sergio Daniel Buitrago Suancha (Red Team), Daniel Julian Peña Bonilla (Red Team)  
 **Repositorio / commit:** https://github.com/nivek2329/Lab3-FDSI-lab / `2405de0ca3b06d246af81c63e893b4e9daac7026`  
 **Entorno autorizado:** Repositorio propio y staging de laboratorio autorizado (`http://localhost:8080`)  
 **Fecha:** 21 de Octubre de 2026  

@@ -1,6 +1,6 @@
 # Análisis STRIDE — Laboratorio 3
 
-## Grupo G06 | Kevin Ángel (Blue) · Sergio Buitrago (Red) | FDSI 2026-2
+## Grupo G06 | Kevin Ángel (Blue Team) · Sergio Buitrago (Red Team) · Daniel Julian Peña Bonilla (Red Team) | FDSI 2026-2
 
 ## Modelo de Amenazas
 
