@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 05: Application Security & DevSecOps Presentation</title>
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: rgba(18, 26, 43, 0.85);
+      --border: #233554;
+      --accent: #38bdf8;
+      --accent-green: #34d399;
+      --accent-orange: #fb923c;
+      --accent-red: #f87171;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .deck-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2.5rem;
+      position: relative;
+    }
+    .slide {
+      display: none;
+      width: 100%;
+      max-width: 1080px;
+      min-height: 560px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 3rem 3.5rem;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.5), 0 0 30px rgba(56, 189, 248, 0.1);
+      backdrop-filter: blur(12px);
+      flex-direction: column;
+      justify-content: space-between;
+      animation: fadeIn 0.3s ease;
+    }
+    .slide.active {
+      display: flex;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: var(--accent);
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.8rem;
+    }
+    h1 {
+      font-size: 2.5rem;
+      line-height: 1.2;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+    h2 {
+      font-size: 2rem;
+      color: #fff;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    h3 {
+      font-size: 1.25rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    p, li {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+    strong { color: #fff; }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 1rem 0;
+    }
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+      margin: 1rem 0;
+    }
+    .card {
+      background: rgba(11, 15, 25, 0.7);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+    }
+    .tag-med {
+      color: var(--accent-orange);
+      font-weight: 700;
+      font-size: 0.85rem;
+      background: rgba(251, 146, 60, 0.15);
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+    .tag-low {
+      color: var(--accent-green);
+      font-weight: 700;
+      font-size: 0.85rem;
+      background: rgba(52, 211, 153, 0.15);
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+    .code-box {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      background: #060911;
+      border: 1px solid #1e293b;
+      padding: 0.85rem 1.1rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      color: #38bdf8;
+      margin-top: 0.5rem;
+    }
+    .speaker-note {
+      background: rgba(248, 113, 113, 0.08);
+      border-left: 3px solid var(--accent-green);
+      padding: 0.75rem 1rem;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.95rem;
+      color: #93c5fd;
+      margin-top: 1rem;
+    }
+    .speaker-tag {
+      font-weight: bold;
+      color: var(--accent-green);
+      margin-right: 6px;
+    }
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 3rem;
+      background: #070a12;
+      border-top: 1px solid var(--border);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .nav-btns button {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #fff;
+      padding: 6px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-left: 8px;
+      transition: all 0.2s;
+    }
+    .nav-btns button:hover {
+      background: var(--accent);
+      color: #0b0f19;
+    }
+    .progress-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 4px;
+      background: var(--accent);
+      transition: width 0.3s;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="deck-container">
+
+    <!-- Slide 1: Title -->
+    <div class="slide active">
+      <div>
+        <span class="badge">FDSI · Lab 05 Presentation</span>
+        <h1>Application Security & DevSecOps</h1>
+        <p style="font-size: 1.3rem; color: var(--accent); margin-bottom: 2rem;">Static & Dynamic Security Testing on NetOps Web Portal</p>
+        <div class="card" style="max-width: 500px;">
+          <p><strong>Team Members (Group G06):</strong></p>
+          <ul style="list-style: none; margin-top: 0.5rem;">
+            <li>👤 Kevin Andrey Ángel Acevedo</li>
+            <li>👤 Sergio Daniel Buitrago Suancha</li>
+            <li>👤 Daniel Julian Peña Bonilla</li>
+          </ul>
+        </div>
+      </div>
+      <div class="speaker-note">
+        <span class="speaker-tag">Person 1:</span> "Good morning everyone. Today we are presenting our security testing and fixes for Lab 5 in a simple and direct way."
+      </div>
+    </div>
+
+    <!-- Slide 2: The 4 Security Checks -->
+    <div class="slide">
+      <div>
+        <span class="badge">Methodology</span>
+        <h2>Our 4 Automated Security Checks</h2>
+        <div class="grid-4">
+          <div class="card">
+            <h3>1. SAST</h3>
+            <p><strong>Static Code Analysis</strong></p>
+            <p>Scanning source code and workflows with <strong>Semgrep</strong>.</p>
+          </div>
+          <div class="card">
+            <h3>2. Secrets</h3>
+            <p><strong>Secret Detection</strong></p>
+            <p>Looking for passwords, tokens and keys with <strong>Gitleaks</strong>.</p>
+          </div>
+          <div class="card">
+            <h3>3. SCA</h3>
+            <p><strong>Component Security</strong></p>
+            <p>Monitoring outdated dependencies with <strong>Dependabot</strong>.</p>
+          </div>
+          <div class="card">
+            <h3>4. DAST</h3>
+            <p><strong>Dynamic Testing</strong></p>
+            <p>Testing live website behavior with <strong>OWASP ZAP</strong> & curl.</p>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-note">
+        <span class="speaker-tag">Person 1:</span> "We evaluated our application using static code analysis, secret scanning, dependency checks, and live dynamic testing."
+      </div>
+    </div>
+
+    <!-- Slide 3: What We Found -->
+    <div class="slide">
+      <div>
+        <span class="badge">Question 1 · Findings</span>
+        <h2>What Did We Find?</h2>
+        <div class="grid-2">
+          <div class="card">
+            <span class="tag-med">MEDIUM RISK</span>
+            <h3 style="margin-top:0.5rem;">Missing Security Headers</h3>
+            <p>No protection against <strong>Clickjacking</strong>. The site could be loaded inside an unauthorized <code>&lt;iframe&gt;</code>.</p>
+          </div>
+          <div class="card">
+            <span class="tag-low">LOW RISK</span>
+            <h3 style="margin-top:0.5rem;">Server Version Leak</h3>
+            <p>Server banner revealed: <code>Server: nginx/1.24.0 (Ubuntu)</code>, giving exact clues to attackers.</p>
+          </div>
+          <div class="card">
+            <span class="tag-med">MEDIUM RISK</span>
+            <h3 style="margin-top:0.5rem;">DOM XSS Risk in Logs</h3>
+            <p>The table in <code>audit-log.html</code> printed text directly into the page without sanitizing input.</p>
+          </div>
+          <div class="card">
+            <span class="tag-med">MEDIUM RISK</span>
+            <h3 style="margin-top:0.5rem;">Supply Chain Action Tags</h3>
+            <p>GitHub Actions workflows used floating tags (like <code>@v4</code>) instead of immutable commit hashes.</p>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-note">
+        <span class="speaker-tag">Person 1:</span> "We found 4 main issues: lack of headers for Clickjacking, server version disclosure, potential XSS in log tables, and mutable action tags."
+      </div>
+    </div>
+
+    <!-- Slide 4: How We Found It -->
+    <div class="slide">
+      <div>
+        <span class="badge">Question 2 · Detection</span>
+        <h2>How Did We Find It?</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Automated CI/CD Tools</h3>
+            <ul style="margin-left: 1.2rem; margin-top: 0.5rem;">
+              <li><strong>Semgrep (SAST):</strong> Flagged 6 warnings about mutable GitHub Action tags.</li>
+              <li><strong>Gitleaks:</strong> Scanned Git commit history. Result: <strong>0 secrets exposed</strong>.</li>
+              <li><strong>OWASP ZAP (DAST):</strong> Ran in Docker against our local staging and flagged missing headers.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Manual Testing (Pentesting)</h3>
+            <ul style="margin-left: 1.2rem; margin-top: 0.5rem;">
+              <li><strong>Clickjacking PoC:</strong> We created an HTML page with an <code>&lt;iframe&gt;</code> and verified our website loaded without restriction.</li>
+              <li><strong>Banner Grabbing:</strong> We ran <code>curl -I http://localhost:8080</code> to view raw HTTP headers.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-note">
+        <span class="speaker-tag">Person 1:</span> "We used Semgrep in GitHub Actions, Gitleaks for secrets, OWASP ZAP for dynamic scanning, and confirmed the Clickjacking vector manually with an iframe."
+      </div>
+    </div>
+
+    <!-- Slide 5: How We Solved It -->
+    <div class="slide">
+      <div>
+        <span class="badge">Question 3 · Remediation</span>
+        <h2>How Did We Solve It?</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>1. Nginx Server Hardening</h3>
+            <p>Configured security headers and hidden tokens in <code>nginx/netops-portal.conf</code>:</p>
+            <div class="code-box">
+              server_tokens off;<br>
+              add_header X-Frame-Options "DENY" always;<br>
+              add_header Content-Security-Policy "...";<br>
+              add_header X-Content-Type-Options "nosniff";
+            </div>
+          </div>
+          <div class="card">
+            <h3>2. Frontend & CI/CD Fixes</h3>
+            <p><strong>DOM XSS Defense:</strong> Created <code>escapeHTML()</code> in JS to sanitize input before rendering.</p>
+            <p style="margin-top: 0.8rem;"><strong>Supply Chain Fix:</strong> Pinned GitHub Actions to fixed 40-character SHA commits:</p>
+            <div class="code-box">
+              uses: actions/checkout@b4ffde65f...
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="speaker-note">
+        <span class="speaker-tag">Person 2:</span> "To solve these, we hardened Nginx with X-Frame-Options: DENY and server_tokens off, added escapeHTML to sanitize inputs, and pinned action tags with SHA hashes."
+      </div>
+    </div>
+
+    <!-- Slide 6: How We Validated It -->
+    <div class="slide">
+      <div>
+        <span class="badge">Question 4 · Validation</span>
+        <h2>How Did We Validate It? (Before vs After)</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Before Remediation</h3>
+            <ul style="margin-left: 1.2rem; margin-top: 0.5rem;">
+              <li>❌ Site loaded inside external iframe.</li>
+              <li>❌ <code>Server: nginx/1.24.0 (Ubuntu)</code> visible.</li>
+              <li>❌ 6 Semgrep supply chain warnings.</li>
+            </ul>
+          </div>
+          <div class="card" style="border-color: rgba(52, 211, 153, 0.4);">
+            <h3 style="color: var(--accent-green);">After Remediation</h3>
+            <ul style="margin-left: 1.2rem; margin-top: 0.5rem;">
+              <li>✅ Browser blocks iframe with error.</li>
+              <li>✅ Clean response: <code>Server: nginx</code>.</li>
+              <li>✅ <strong>Pull Request #1:</strong> 4/4 checks green (0 warnings).</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card" style="margin-top: 1rem; text-align: center;">
+          <p>Validated in GitHub: <strong>Pull Request #1</strong> (Merged cleanly with all workflows passing).</p>
+        </div>
+      </div>
+      <div class="speaker-note">
+        <span class="speaker-tag">Person 2:</span> "We verified that the browser now blocks the iframe attack, the server version is gone, and our Pull Request #1 passed all CI/CD checks with zero warnings."
+      </div>
+    </div>
+
+    <!-- Slide 7: Conclusion -->
+    <div class="slide">
+      <div>
+        <span class="badge">Key Takeaways</span>
+        <h2>Conclusions & Lessons Learned</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Shift-Left Security</h3>
+            <p>Catching vulnerabilities in pull requests with tools like Semgrep and Gitleaks is much faster and cheaper than fixing them in production.</p>
+          </div>
+          <div class="card">
+            <h3>Defense in Depth</h3>
+            <p>Application security requires protecting both the <strong>code</strong> (input sanitization) and the <strong>web server</strong> (HTTP headers & token hiding).</p>
+          </div>
+        </div>
+        <div style="margin-top: 2rem; text-align: center;">
+          <h1 style="color: var(--accent-green); font-size: 2.2rem;">Thank you! Questions?</h1>
+          <p>Repository: github.com/nivek2329/Lab3-FDSI-lab</p>
+        </div>
+      </div>
+      <div class="speaker-note">
+        <span class="speaker-tag">Person 2:</span> "In conclusion, shifting security left into our CI/CD pipeline and applying defense-in-depth ensures a safer development lifecycle. Thank you very much."
+      </div>
+    </div>
+
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <div class="footer">
+    <div>Slide <span id="currentSlide">1</span> of <span id="totalSlides">7</span> · Use Left/Right Arrow keys</div>
+    <div class="nav-btns">
+      <button id="prevBtn">← Previous</button>
+      <button id="nextBtn">Next →</button>
+    </div>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const currentSlideEl = document.getElementById('currentSlide');
+    const totalSlidesEl = document.getElementById('totalSlides');
+    const progressBar = document.getElementById('progressBar');
+    let idx = 0;
+
+    totalSlidesEl.textContent = slides.length;
+
+    function update() {
+      slides.forEach((s, i) => s.classList.toggle('active', i === idx));
+      currentSlideEl.textContent = idx + 1;
+      progressBar.style.width = ((idx + 1) / slides.length * 100) + '%';
+    }
+
+    prevBtn.addEventListener('click', () => { if (idx > 0) { idx--; update(); } });
+    nextBtn.addEventListener('click', () => { if (idx < slides.length - 1) { idx++; update(); } });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        if (idx < slides.length - 1) { idx++; update(); }
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        if (idx > 0) { idx--; update(); }
+      }
+    });
+
+    update();
+  </script>
+</body>
+</html>
