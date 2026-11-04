@@ -1,0 +1,12 @@
+Revalidación HTTP local de cabeceras
+URL: http://localhost:8080/
+Fecha local: 2026-11-04 18:37:59 -05:00
+Estado: 200
+Server: nginx
+Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; frame-ancestors 'none';
+X-Frame-Options: DENY
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+Permissions-Policy: camera=(), microphone=(), geolocation=()
+Strict-Transport-Security: ausente
+Alcance: prueba HTTP local sobre el Nginx temporal del checkout. No sustituye OWASP ZAP ni valida HSTS sobre HTTPS.

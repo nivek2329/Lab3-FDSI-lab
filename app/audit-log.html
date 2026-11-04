@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
 
     <title>Registro de Auditoría</title>
@@ -32,8 +32,8 @@
         </div>
 
         <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: flex-end;">
-            <button class="btn btn-primary" onclick="loadAuditLog()">Actualizar Registro</button>
-            <button class="btn" onclick="clearAuditLog()" style="color: var(--danger); border-color: rgba(248, 81, 73, 0.4);">Borrar Historial (Reset)</button>
+            <button class="btn btn-primary" id="refreshAudit">Actualizar Registro</button>
+            <button class="btn" id="clearAudit" style="color: var(--danger); border-color: rgba(248, 81, 73, 0.4);">Borrar Historial (Reset)</button>
         </div>
 
         <div style="overflow-x: auto;">
@@ -63,53 +63,6 @@
         </div>
     </footer>
 
-    <script>
-                function escapeHTML(str) {
-            const div = document.createElement('div');
-            div.textContent = str || '';
-            return div.innerHTML;
-        }
-        function loadAuditLog() {
-            const tbody = document.getElementById('auditBody');
-            const emptyMsg = document.getElementById('emptyMessage');
-            const table = document.getElementById('auditTable');
-            
-            let auditLog = JSON.parse(localStorage.getItem('netops_audit_log') || '[]');
-            
-            tbody.innerHTML = '';
-            
-            if (auditLog.length === 0) {
-                table.style.display = 'none';
-                emptyMsg.style.display = 'block';
-                return;
-            }
-            
-            table.style.display = 'table';
-            emptyMsg.style.display = 'none';
-            
-            auditLog.forEach(entry => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td style="font-family: monospace; font-size: 0.9em; color: #8b949e;">${entry.timestamp}</td>
-                    <td><strong>${escapeHTML(entry.operator)}</strong></td>
-                    <td><span class="badge badge-active">${entry.device}</span></td>
-                    <td><code>${entry.script}</code></td>
-                    <td><span class="badge badge-approved">${entry.status}</span></td>
-                    <td style="font-family: monospace; font-size: 0.85em; color: #d29922;">${entry.hash}</td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
-        function clearAuditLog() {
-            if (confirm('¿Está seguro de que desea borrar todo el historial de auditoría?')) {
-                localStorage.removeItem('netops_audit_log');
-                loadAuditLog();
-            }
-        }
-
-        // Cargar al iniciar
-        window.onload = loadAuditLog;
-    </script>
+    <script src="js/audit-log.js" defer></script>
 </body>
 </html>

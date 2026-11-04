@@ -183,3 +183,4 @@ FLAG{CODEBREAKERS_ECI}
 
 3. **Arquitectura Recomendada:**
    En entornos de producción, la verificación de credenciales debe delegarse a servicios remotos seguros (Backends con protocolos de autenticación como OAuth2/OIDC, módulos de seguridad de hardware HSM, o arquitecturas Zero-Knowledge Proofs), evitando que los secretos o las llaves maestras residan en software cliente distribuido.
+

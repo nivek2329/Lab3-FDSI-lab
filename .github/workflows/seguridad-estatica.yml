@@ -18,7 +18,7 @@ jobs:
       - name: Instalar Semgrep
         run: python -m pip install --upgrade semgrep
       - name: Análisis con reglas comunitarias
-        run: semgrep scan --config p/owasp-top-ten --config p/secrets --json --output semgrep.json || true
+        run: semgrep scan --config p/owasp-top-ten --config p/secrets --error --json --output semgrep.json app/js .github/workflows
       - name: Publicar evidencia
         if: always()
         uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4.6.1

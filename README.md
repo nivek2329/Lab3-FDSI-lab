@@ -83,7 +83,7 @@ Se utilizó asistencia de IA como apoyo para revisar la redacción y organizar e
 
 Integración de controles automáticos de seguridad en GitHub Actions para el proyecto **NetOps Secure Execution Portal**:
 
-- 🔍 **SAST:** Análisis estático de código mediante Semgrep y CodeQL (`.github/workflows/seguridad-estatica.yml`).
+- 🔍 **SAST:** Análisis estático de código mediante Semgrep (`.github/workflows/seguridad-estatica.yml`); reescaneo del commit actual pendiente.
 - 🔑 **Secret Detection:** Detección de secretos y credenciales con Gitleaks y GitHub Secret Scanning.
 - 📦 **SCA:** Detección de vulnerabilidades en dependencias mediante Dependabot.
 - 🌐 **DAST:** Evaluación dinámica pasiva con OWASP ZAP Baseline (`.github/workflows/dast-staging.yml`).
@@ -101,3 +101,10 @@ Integración de controles automáticos de seguridad en GitHub Actions para el pr
 - ✅ [Checklist de seguridad para Pull Requests](docs/CHECKLIST_PR.md)
 - 🧭 [Guía de Integración AppSec](docs/README_INTEGRACION.md)
 - 📊 [Tablero interactivo del laboratorio](AppSec_Lab_FSI.html)
+
+## Sustentación
+
+- Guion AppSec de cinco minutos: docs/SUSTENTACION_5_MIN.md
+- Inventario SCA: [docs/evidence/appsec/DEPENDENCIAS.md](docs/evidence/appsec/DEPENDENCIAS.md)
+- Estado de revalidación: [docs/evidence/appsec/ESTADO_REVALIDACION.md](docs/evidence/appsec/ESTADO_REVALIDACION.md)
+- Presentación PowerPoint: [docs/Sustentacion_AppSec_G06.pptx](docs/Sustentacion_AppSec_G06.pptx)

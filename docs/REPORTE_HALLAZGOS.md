@@ -20,9 +20,9 @@
 
 ## 1. Resumen Ejecutivo (A Simple Vista)
 
-Durante la evaluación de seguridad sobre el portal **NetOps Secure Execution Portal**, se integró un pipeline automatizado DevSecOps de análisis estático (**Semgrep**, **CodeQL**), detección de secretos (**Gitleaks**), análisis de dependencias (**Dependabot**) y validación dinámica (**OWASP ZAP** y pruebas dirigidas).
+Durante la evaluación de seguridad sobre el portal **NetOps Secure Execution Portal**, se integró un pipeline automatizado DevSecOps de análisis estático (**Semgrep**), detección de secretos (**Gitleaks**), análisis de dependencias (**Dependabot**) y validación dinámica (**OWASP ZAP** y pruebas dirigidas).
 
-A través del pipeline y el análisis en consola local (**PowerShell**), se identificaron y remediaron satisfactoriamente **4 categorías de fallas de seguridad**, logrando un estado final de **0 vulnerabilidades activas** y **100% de verificaciones aprobadas en GitHub Actions**.
+A través del pipeline y el análisis en consola local (**PowerShell**), se identificaron y remediaron satisfactoriamente **4 categorías de fallas de seguridad**, remediando los hallazgos descritos y dejando controles automatizados configurados. Los resultados del commit final deben generarse antes de afirmar cero vulnerabilidades activas.
 
 ### Matriz Comparativa de Hallazgos (Antes vs. Después)
 
@@ -30,8 +30,8 @@ A través del pipeline y el análisis en consola local (**PowerShell**), se iden
 |---|---|---|---|---|---|---|
 | **F-01** | Ausencia de Cabeceras de Seguridad HTTP (Clickjacking) | CWE-693 / CWE-1021<br>OWASP A05:2021 | **Media** (CVSS 5.4) | `nginx/netops-portal.conf`<br>`app/*.html` | Cabeceras ausentes; portal embebible en `<iframe>` | **CORREGIDO**: Cabeceras `CSP`, `X-Frame-Options: DENY`, `HSTS`, `nosniff` aplicadas en Nginx y HTML. |
 | **F-02** | Fuga de Información de Versión del Servidor | CWE-200<br>OWASP A05:2021 | **Baja** (CVSS 3.1) | `nginx/netops-portal.conf` | Expone: `Server: nginx/1.24.0 (Ubuntu)` | **CORREGIDO**: `server_tokens off;` oculta versión y SO (`Server: nginx`). |
-| **F-03** | Riesgo de Cross-Site Scripting (DOM XSS) en Logs | CWE-79<br>OWASP A03:2021 | **Media** (CVSS 6.1) | `app/audit-log.html` | Inserción directa de `entry.operator` en DOM | **CORREGIDO**: Función `escapeHTML()` implementada en renderizado dinámico. |
-| **F-04** | Dependencias Mutables en GitHub Actions (Supply Chain) | CWE-829<br>OWASP A06:2021 | **Media (Warning)** (6 hallazgos Semgrep) | `.github/workflows/seguridad-estatica.yml`<br>`.github/workflows/dast-staging.yml` | 6 pasos usan tags mutables (`@v4`, `@v5`, `@v3`) | **CORREGIDO**: 6 pasos pineados a commits SHA-40 inmutables (0 findings verificados). |
+| **F-03** | Riesgo de Cross-Site Scripting (DOM XSS) en Logs | CWE-79<br>OWASP A03:2021 | **Media** (CVSS 6.1) | `app/audit-log.html` | Inserción directa de `entry.operator` en DOM | **CORREGIDO EN CÓDIGO**: scripts externalizados; los datos se escriben con nodos DOM y textContent. Reescaneo Semgrep pendiente. |
+| **F-04** | Dependencias Mutables en GitHub Actions (Supply Chain) | CWE-829<br>OWASP A06:2021 | **Media (Warning)** (6 hallazgos Semgrep) | `.github/workflows/seguridad-estatica.yml`<br>`.github/workflows/dast-staging.yml` | 6 pasos usan tags mutables (`@v4`, `@v5`, `@v3`) | **CORREGIDO**: acciones pineadas a SHA-40; reescaneo Semgrep del commit final pendiente. |
 
 ---
 
@@ -39,7 +39,7 @@ A través del pipeline y el análisis en consola local (**PowerShell**), se iden
 
 El ciclo de evaluación y remediación se estructuró bajo el principio de **Shift-Left Security**:
 
-$$\text{Alcance y Línea Base} \longrightarrow \text{SAST (Semgrep/CodeQL)} \longrightarrow \text{Secret Scanning (Gitleaks)} \longrightarrow \text{SCA (Dependabot)} \longrightarrow \text{DAST (OWASP ZAP)} \longrightarrow \text{Remediación} \longrightarrow \text{Reescaneo (0 Fallas)}$$
+$$\text{Alcance y Línea Base} \longrightarrow \text{SAST (Semgrep)} \longrightarrow \text{Secret Scanning (Gitleaks)} \longrightarrow \text{SCA (Dependabot)} \longrightarrow \text{DAST (OWASP ZAP)} \longrightarrow \text{Remediación} \longrightarrow \text{Reescaneo y evidencia del commit final}$$
 
 ---
 
@@ -105,7 +105,7 @@ uses: gitleaks/gitleaks-action@e0c47f4f8be36e29cdc102c57e68cb5cbf0e8d1e # v3
 
 #### E. Validación del Después (0 Hallazgos en PowerShell y GitHub Actions)
 Al volver a correr el análisis estático en la rama corregida:
-- **Resultado en Semgrep:** 38 reglas ejecutadas sobre 38 archivos: **0 findings (0 errors, 0 warnings)**.
+- **Resultado Semgrep del commit final:** pendiente. El JSON histórico tiene error de parseo en `app/simulate.html`, así que no sustenta un resultado de cero hallazgos. Reejecutar el workflow corregido y adjuntar su artefacto.
 - **Resultado en GitHub Actions:** Pipeline 100% verde con todas las acciones verificadas por hash criptográfico.
 
 ![GitHub Actions - Ejecución de Flujos Limpia y Aprobada](evidence/appsec/05_actions_summary_correccion_8c094dd.png)
@@ -130,28 +130,7 @@ Connection: keep-alive
 *Impacto:* El portal podía ser incrustado en sitios maliciosos dentro de un `<iframe>`, permitiendo ataques de secuestro de clics (Clickjacking) y habilitando la inyección de scripts sin restricciones de Content-Security-Policy.
 
 #### C. Cómo se solucionó (Remediación técnica)
-1. **Configuración en Nginx (`nginx/netops-portal.conf`):**
-```nginx
-# Cabeceras de seguridad HTTP endurecidas
-add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-ancestors 'none';" always;
-add_header X-Frame-Options "DENY" always;
-add_header X-Content-Type-Options "nosniff" always;
-add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
-add_header Referrer-Policy "strict-origin-when-cross-origin" always;
-add_header Permissions-Policy "camera=(), microphone=(), geolocation=()" always;
-```
-2. **Defensa en profundidad en el Frontend (`app/*.html`):** Inserción de metaetiquetas equivalentes en las etiquetas `<head>`.
-
-#### D. Estado Después (Validación de cabeceras)
-```http
-HTTP/1.1 200 OK
-Server: nginx
-X-Frame-Options: DENY
-X-Content-Type-Options: nosniff
-Strict-Transport-Security: max-age=31536000; includeSubDomains
-Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-ancestors 'none';
-```
-Cualquier intento de enmarcado en un `<iframe>` es bloqueado automáticamente por los navegadores modernos.
+Se reemplazó la interpolación de datos de auditoría y simulación en innerHTML por nodos DOM y textContent. Esto cubre timestamp, operador, dispositivo, script, estado, hash, salida de terminal y mensaje de éxito. Los scripts se externalizaron en app/js/ y el CSP ya no permite scripts inline.
 
 ---
 
@@ -244,3 +223,6 @@ Para presentar el avance de forma pedagógica e intuitiva a evaluadores, se impl
 2. **Cultura DevSecOps (Shift-Left):**
    - Incorporar verificaciones desde las etapas tempranas de desarrollo reduce drásticamente el costo y tiempo de remediación.
    - La seguridad no es un evento aislado al final del ciclo de vida del software, sino un proceso continuo automatizado en cada `push` y `pull request`.
+
+## Estado actual de la evidencia
+El semgrep.json existente contenía un error de parseo y no respalda cero findings. Después de estos cambios, ejecutar de nuevo el workflow estático, guardar el resumen Gitleaks y descargar los reportes HTML/JSON de ZAP. Para SCA, no hay paquetes de runtime declarados; Dependabot quedó configurado para acciones GitHub y su resultado debe verificarse en Security > Dependabot alerts. Ver docs/evidence/appsec/DEPENDENCIAS.md.

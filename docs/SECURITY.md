@@ -17,10 +17,10 @@
 ## 2. Línea base y herramientas
 | Herramienta | Tipo | Fecha | Resultado Inicial | Estado Posterior | Enlace a evidencia |
 |---|---|---|---|---|---|
-| Semgrep (SAST) | SAST | 2026-10-21 | 6 advertencias detectadas (`github-actions-mutable-action-tag`) | **0 hallazgos** (acciones pineadas con SHA-40) | [semgrep.json](file:///semgrep.json) / Capturas PowerShell |
-| Gitleaks | Secretos | 2026-10-21 | Escaneo de historial Git (`fetch-depth: 0`) | **0 secretos expuestos** | Workflow `seguridad-estatica.yml` |
-| Dependabot | SCA | 2026-10-21 | Monitoreo de componentes activado | **Configurado y activo** | Pestaña Security → Dependabot alerts |
-| OWASP ZAP Baseline | DAST pasivo | 2026-10-21 | Cabeceras faltantes (CSP, X-Frame-Options) y Server Tokens | **Cabeceras implementadas** | Workflow `dast-staging.yml` / Informe ZAP |
+| Semgrep (SAST) | SAST | 2026-10-21 | 6 advertencias detectadas (`github-actions-mutable-action-tag`) | **reescaneo pendiente**; el semgrep.json previo tiene error de parseo | [semgrep.json](../semgrep.json) / Capturas PowerShell |
+| Gitleaks | Secretos | 2026-10-21 | Escaneo de historial Git (`fetch-depth: 0`) | **workflow configurado; repetir en el commit final** | Workflow `seguridad-estatica.yml` |
+| Dependabot | SCA | 2026-10-21 | Monitoreo de componentes activado | **Dependabot configurado para GitHub Actions; resultado remoto pendiente** | Pestaña Security → Dependabot alerts |
+| OWASP ZAP Baseline | DAST pasivo | 2026-10-21 | Cabeceras faltantes (CSP, X-Frame-Options) y Server Tokens | **cabeceras implementadas; artefacto ZAP del commit final pendiente** | Workflow `dast-staging.yml` / Informe ZAP |
 
 ### Evidencia de Detección en Consola PowerShell (Antes de la Remediación)
 ![Script PowerShell ejecutando el análisis de semgrep.json](evidence/appsec/07_powershell_script_command.png)
@@ -95,3 +95,6 @@
   - Aplicar `add_header X-Frame-Options "DENY"` en Nginx para bloquear incrustaciones no autorizadas.
   - Implementar `server_tokens off;` para eliminar la divulgación de versión.
   - Prueba de regresión: Al reejecutar la prueba con el iframe, el navegador bloquea la carga con el error `Refused to display in a frame because it set 'X-Frame-Options' to 'deny'`.
+
+## Estado de revalidación
+Se corrigió el renderizado dinámico con APIs DOM y textContent, se externalizaron los scripts para Semgrep y se configuró Dependabot para GitHub Actions. El semgrep.json existente contiene un error de parseo y no prueba cero findings. Reejecutar los workflows en el commit final y guardar los reportes Semgrep, Gitleaks y ZAP. El inventario SCA y la evidencia pendiente están documentados en docs/evidence/appsec/.
