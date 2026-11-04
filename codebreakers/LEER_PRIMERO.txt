@@ -1,0 +1,24 @@
+CODEBREAKERS — EL MISTERIO DEL CODIGO OCULTO
+Eciciencia 2026 | FDSI | Escuela Colombiana de Ingenieria Julio Garavito
+
+ANTES DE COMENZAR
+1. Extrae TODO el ZIP en una carpeta local de Windows.
+2. Abre CODEBREAKERS_Guia_Estudiantes_Windows.html con Edge o Chrome.
+3. Ten instalado Ghidra + el JDK compatible (en la version actual, JDK 25 de 64 bits).
+4. Ejecuta ghidraRun.bat desde la carpeta de Ghidra.
+5. En Ghidra: File > New Project > Non-Shared Project.
+6. En Ghidra: File > Import File... y elige reto_codebreakers_linux_x64.
+7. Realiza el analisis indicado en la guia HTML.
+
+IMPORTANTE SOBRE WINDOWS:
+El archivo reto_codebreakers_linux_x64 es ELF para Linux x86-64, NO un ejecutable .exe.
+Puedes ABRIRLO Y ANALIZARLO desde Ghidra en Windows sin convertirlo.
+NO puedes ejecutarlo directamente con doble clic en Windows.
+Para comprobar la clave, usa el validador auxiliar de la guia HTML (funciona sin Internet),
+o usa Linux/WSL disponible en un computador autorizado del laboratorio.
+
+SOFTWARE OFICIAL:
+Ghidra: https://github.com/NationalSecurityAgency/ghidra/releases
+JDK Temurin: https://adoptium.net/
+
+Este paquete de estudiantes NO contiene el codigo fuente ni las soluciones.

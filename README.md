@@ -23,6 +23,17 @@ Repositorio de entrega del laboratorio 4 de Fundamentos de Seguridad Informátic
 | Nivel 1 | `FLAG{strings_are_evidence}` | [`level1.md`](docs/evidence/reverse/level1.md) |
 | Nivel 2 | `FLAG{ghidra_plus_gdb}` | [`level2.md`](docs/evidence/reverse/level2.md), [`gdb.md`](docs/evidence/reverse/gdb.md) |
 | Boss stripped | `FLAG{ghidra_plus_gdb}` | [`boss.md`](docs/evidence/reverse/boss.md) |
+| Code Breaker (Lab 6) | `FLAG{CODEBREAKERS_ECI}` (Clave: `BREAKER#2026`) | [`REPORTE_CODEBREAKER.md`](docs/REPORTE_CODEBREAKER.md) |
+
+---
+
+## Actividad Code Breaker (Lab 6 / Eciciencia 2026)
+- **Informe Técnico Consolidado:** [`docs/REPORTE_CODEBREAKER.md`](docs/REPORTE_CODEBREAKER.md)
+- **Paquete y Binario:** [`codebreakers/`](codebreakers/)
+- **Galería de Evidencias:** [`docs/evidence/codebreaker/`](docs/evidence/codebreaker/)
+- **Clave en Texto Plano:** `BREAKER#2026`
+- **Bandera (Flag):** `FLAG{CODEBREAKERS_ECI}`
+- **Vector Criptográfico:** AES-256-CBC descifrado con llave `CodeBreakersECI_AES256_KEY_2026!` y vector `ECI_VECTOR_2026!`.
 
 ## Reproducción
 

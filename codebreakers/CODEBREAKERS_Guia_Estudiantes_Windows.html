@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CODEBREAKERS · Guía de ingeniería inversa | Eciciencia 2026</title>
+<style>
+:root{--bg:#07121f;--panel:#0f2236;--panel2:#142b42;--line:#29445d;--tx:#edf7ff;--muted:#a6c0d5;--mint:#58edd2;--sky:#80d1ff;--amber:#ffd18b;--rose:#ff9baf;--good:#87f3ae}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 15% 0%,#15334b 0%,transparent 35%),var(--bg);color:var(--tx);font-family:system-ui,-apple-system,'Segoe UI',Arial,sans-serif;line-height:1.5}a{color:var(--sky)}button,input{font:inherit}button{cursor:pointer}.shell{display:grid;grid-template-columns:275px minmax(0,1fr);min-height:100vh}.side{background:#091a2c;border-right:1px solid var(--line);padding:24px 18px;position:sticky;top:0;height:100vh;overflow:auto}.logo{font-size:1.24rem;font-weight:900;letter-spacing:.09em;color:var(--mint)}.eyebrow{color:var(--sky);font-weight:800;font-size:.7rem;letter-spacing:.13em;text-transform:uppercase}.meta{color:var(--muted);font-size:.85rem}.small{font-size:.85rem;color:var(--muted)}.nav{margin-top:25px}.nav a{display:block;padding:10px 12px;color:#cae1f1;text-decoration:none;border-radius:9px;font-size:.91rem}.nav a:hover,.nav a:focus-visible{background:#183653}.pbar{height:9px;background:#213e52;border-radius:16px;overflow:hidden;margin:9px 0}.pbar > div{height:100%;background:linear-gradient(90deg,var(--mint),var(--sky));width:0;transition:width .2s}.main{max-width:1130px;padding:44px clamp(20px,5vw,65px) 85px;width:100%;margin:0 auto}.hero{padding:27px 31px;border:1px solid #36617a;border-radius:23px;background:linear-gradient(132deg,rgba(29,73,97,.8),rgba(13,34,55,.9));box-shadow:0 15px 35px #0002;margin-bottom:22px}.hero h1{font-size:clamp(2.1rem,5vw,3.45rem);line-height:1.09;letter-spacing:-.03em;margin:9px 0 13px}.hero h1 em{font-style:normal;color:var(--mint)}.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:19px}.chip{border-radius:100px;border:1px solid #417185;padding:5px 10px;color:#d1f0f9;background:#14354d;font-weight:650;font-size:.77rem}.card{border:1px solid var(--line);background:rgba(15,34,54,.91);border-radius:17px;padding:23px 25px;margin:16px 0}.card h2{margin:0 0 9px;font-size:1.43rem}.card h3{font-size:1.04rem;color:var(--sky);margin:19px 0 8px}.card p{margin:7px 0 13px;color:#d9e9f5}.tag{display:inline-block;border-radius:7px;padding:4px 7px;font-size:.74rem;font-weight:800;background:#16455a;color:var(--mint)}.callout{border-left:4px solid var(--sky);border-radius:9px;background:#123249;padding:13px 17px;margin:13px 0}.warning{border-left-color:var(--amber);background:#3c2d24}.success{border-left-color:var(--good)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.tile{background:#142c44;border:1px solid #2c4b64;padding:17px;border-radius:12px}.tile strong{display:block;color:#fff;margin-bottom:4px}.tile p{margin:3px 0;color:#bbd2e4;font-size:.9rem}table{border-collapse:collapse;width:100%;margin:16px 0;font-size:.91rem}th,td{border-bottom:1px solid #2a4b62;text-align:left;padding:11px 10px;vertical-align:top}th{color:var(--mint);font-weight:800}td{color:#d6e6f1}code{background:#0b1e30;border:1px solid #27475d;border-radius:5px;color:#aff5de;padding:1px 5px}pre{position:relative;margin:12px 0;background:#061725;border:1px solid #2a506a;border-radius:12px;padding:18px 15px;color:#d6f9ef;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;overflow:auto;font-size:.89rem;line-height:1.58}.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid #47849b;color:#ecfcff;background:#195069;padding:10px 16px;border-radius:11px;font-weight:800}.btn:hover{filter:brightness(1.12)}.btn:focus-visible,a:focus-visible{outline:3px solid var(--amber);outline-offset:2px}.btn.secondary{background:#152d42;border-color:#3b647b}.copy{float:right;font-size:.75rem;padding:5px 9px;margin:-3px 0 3px 10px}.osbar{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.osbar button{padding:8px 15px;border-radius:10px;background:#0b2439;border:1px solid #35546b;color:#d0e6f6;font-weight:800}.osbar button[aria-pressed=true]{background:#235e74;border-color:var(--mint);color:white}.osview[hidden]{display:none}ol,ul{padding-left:24px}li{margin:7px 0;color:#d3e7f5}.check{display:flex;align-items:start;gap:12px;border:1px solid #28495f;padding:12px;border-radius:11px;margin:10px 0;background:#112c42}.check input{margin:4px 0 0;width:21px;height:21px;accent-color:#60dfbd;flex:none}.check label{cursor:pointer}.stepnum{color:var(--mint);font-weight:900;font-size:.75rem;letter-spacing:.11em;text-transform:uppercase}.hints details{background:#0e2c43;border-radius:11px;padding:10px 13px;margin:9px 0;border:1px solid #29516e}.hints summary{cursor:pointer;font-weight:800}.play{display:flex;gap:10px;align-items:end;flex-wrap:wrap;margin:14px 0}.play label{display:block;font-weight:700;color:#fff}.play input{border-radius:10px;padding:11px;background:#061929;border:1px solid #44839b;color:#fff;min-width:235px}.result{padding:12px;border:1px solid #2e4e65;border-radius:10px;background:#102d44;color:#e5f4ff;min-height:48px}.result.good{color:var(--good);border-color:#277e6d}.result.bad{color:var(--rose);border-color:#a45165}.numbered-title{display:flex;gap:11px;align-items:center}.circle{width:35px;height:35px;border-radius:50%;background:#1b5b6d;color:#d3fff6;display:inline-grid;place-items:center;font-weight:900;flex:none}.footer{font-size:.82rem;color:var(--muted);padding-top:15px}.mobiletop{display:none}.evidence{color:var(--mint);font-weight:700}.done{color:#8bdfb9;font-size:.84rem}.kbd{border:1px solid #8092a5;padding:1px 6px;background:#25394b;border-radius:6px;font-family:monospace}.onlyprint{display:none}@media(max-width:875px){.shell{display:block}.side{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line)}.side .nav{display:flex;overflow:auto;margin:10px 0}.side .nav a{white-space:nowrap}.main{padding:22px 17px 50px}.hero{padding:22px}.grid{grid-template-columns:1fr}}@media print{body{background:white;color:#161b23}.side,.osbar,.btn,.play,.no-print{display:none!important}.shell{display:block}.main{padding:0;max-width:none}.hero,.card,.tile{background:white;color:#161b23;border:1px solid #ddd;box-shadow:none;break-inside:avoid}.hero h1 em,.card h3,.stepnum,.tag{color:#087362}p,li,td,th,.card p,.tile p,.small,.meta{color:#222!important}.callout{background:#f4f5f5}pre{background:#f8f8f8;color:black}code{color:#065e50;background:#f4f4f4}.onlyprint{display:block}}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside class="side">
+  <div class="eyebrow">ECICIENCIA 2026 · FDSI</div><div class="logo">CODEBREAKERS</div>
+  <p class="meta">Guía autónoma del estudiante<br>Miércoles 4 de noviembre · 11:30 a. m.</p>
+  <div class="small" id="percentage">Progreso: 0 / 8 acciones</div><div class="pbar"><div id="bar"></div></div>
+  <nav class="nav" aria-label="Secciones de la guía">
+    <a href="#mision">01 · Misión y reglas</a><a href="#archivos">02 · Archivos</a><a href="#software">03 · Software Windows</a><a href="#paso1">04 · Abrir Ghidra</a><a href="#paso2">05 · Buscar pistas</a><a href="#paso3">06 · Comprender el código</a><a href="#verifica">07 · Comprobar</a><a href="#evidencia">08 · Evidencias</a>
+  </nav>
+  <button class="btn secondary" style="width:100%;margin-top:10px" type="button" onclick="window.print()">Imprimir / guardar como PDF</button>
+</aside>
+<main class="main">
+  <section class="hero" id="mision">
+    <div class="eyebrow">Escuela Colombiana de Ingeniería Julio Garavito · Eciciencia 2026</div>
+    <h1><em>CODEBREAKERS</em><br>El misterio del código oculto</h1>
+    <p>La bóveda digital de una empresa ficticia está protegida por un programa cuyo código fuente se ha perdido. Tienes el ejecutable y una misión: <strong>encontrar la clave y explicar cómo la descubriste</strong>. La contraseña correcta no está escrita en texto plano: está protegida con cifrado <strong>AES-256</strong>.</p>
+    <div class="chips"><span class="chip">🧩 Ingeniería inversa</span><span class="chip">🔐 AES-256</span><span class="chip">💻 Windows + Ghidra</span><span class="chip">🔍 Reto educativo</span><span class="chip">⏱ 15–25 minutos</span><span class="chip">🔒 Sin sistemas reales</span></div>
+  </section>
+  <section class="card">
+    <h2>🎯 ¿Qué vas a lograr?</h2>
+    <div class="grid">
+       <div class="tile"><strong>1 · Inspeccionar</strong><p>Abrir un archivo binario Linux usando Ghidra en Windows.</p></div>
+       <div class="tile"><strong>2 · Investigar</strong><p>Encontrar textos y referencias dentro del programa.</p></div>
+       <div class="tile"><strong>3 · Explicar</strong><p>Interpretar una comparación de cadenas en código descompilado.</p></div>
+       <div class="tile"><strong>4 · Validar</strong><p>Probar la clave y compartir la evidencia con el monitor.</p></div>
+    </div>
+    <div class="callout warning"><strong>Regla del laboratorio:</strong> analiza exclusivamente el archivo entregado por tu monitor. No uses cuentas, contraseñas, redes ni aplicaciones de terceros. <strong>Ghidra no es Hydra:</strong> aquí se utiliza Ghidra, no herramientas de pruebas de contraseñas.</div>
+  </section>
+  <section class="card" id="archivos">
+    <h2>📦 ¿Qué archivos recibiste?</h2>
+    <table><thead><tr><th>Archivo</th><th>¿Qué haces con él?</th></tr></thead><tbody>
+      <tr><td><code>LEEME_RETO.md</code></td><td>Lee las reglas y el objetivo. Se abre con Bloc de notas o VS Code.</td></tr>
+      <tr><td><code>reto_codebreakers_linux_x64</code></td><td><strong>Este es el objetivo.</strong> Impórtalo a Ghidra. No es un archivo .exe de Windows.</td></tr>
+    </tbody></table>
+    <div class="callout"><strong>Importante:</strong> el código fuente <code>reto_codebreakers.c</code> y la guía del docente <strong>NO</strong> deben entregarse a los participantes antes de finalizar, porque revelan cómo se resuelve la misión.</div>
+    <div class="check"><input type="checkbox" class="task" id="t0"><label for="t0">Extraje el ZIP de participantes y localicé el archivo <code>reto_codebreakers_linux_x64</code>.</label></div>
+  </section>
+  <section class="card" id="software">
+    <h2>🛠 Software requerido</h2>
+    <p><strong>Ruta recomendada: Windows 10/11 (64 bits).</strong> Puedes analizar el binario Linux directamente desde Ghidra. No necesitas ejecutar el ELF para resolver la parte de investigación.</p>
+    <table><thead><tr><th>Software</th><th>Obligatorio</th><th>Uso</th></tr></thead><tbody>
+      <tr><td>Java Development Kit <strong>JDK 25, 64 bits</strong></td><td>Sí, según la versión actual de Ghidra</td><td>Permite iniciar Ghidra. <a href="https://adoptium.net/" target="_blank" rel="noopener noreferrer">Descarga Temurin</a></td></tr>
+      <tr><td><strong>Ghidra</strong> (versión oficial precompilada)</td><td>Sí</td><td>Importar y analizar el ejecutable. <a href="https://github.com/NationalSecurityAgency/ghidra/releases" target="_blank" rel="noopener noreferrer">Descarga oficial</a></td></tr>
+      <tr><td>Explorador de Windows / 7-Zip</td><td>Sí</td><td>Descomprimir los archivos del reto y de Ghidra.</td></tr>
+      <tr><td>WSL + Ubuntu</td><td>No, opcional</td><td>Ejecutar el programa Linux dentro de Windows para la validación real.</td></tr>
+    </tbody></table>
+    <p class="small">Requisito de JDK y plataforma: documentación oficial de Ghidra, consultada en noviembre de 2026. Si el laboratorio ya tiene Ghidra instalado, no reinstales nada.</p>
+    <div class="osbar" aria-label="Seleccionar sistema operativo"><button type="button" data-os="windows" aria-pressed="true">🪟 Windows (recomendado)</button><button type="button" data-os="linux" aria-pressed="false">🐧 Linux / WSL</button></div>
+    <div class="osview" data-view="windows"><h3>Preparación en Windows</h3><ol><li>Descarga la distribución <strong>ZIP precompilada</strong> de Ghidra, no el ZIP «Source code».</li><li>Descomprime Ghidra en una carpeta local.</li><li>Abre el archivo <code>ghidraRun.bat</code> que está en esa carpeta.</li><li>Extrae el ZIP del reto en <code>Descargas\CODEBREAKERS</code> u otra carpeta fácil de localizar.</li><li><strong>No renombres</strong> el ejecutable agregándole <code>.exe</code>: Windows no lo ejecutará así.</li></ol></div>
+    <div class="osview" data-view="linux" hidden><h3>Preparación en Linux o WSL</h3><p>Ghidra funciona también en Linux. Puedes analizar el archivo en Ghidra y ejecutar el ELF en una terminal x86-64.</p><pre><button class="btn secondary copy no-print" data-copy="chmod +x reto_codebreakers_linux_x64\n./reto_codebreakers_linux_x64">Copiar</button>chmod +x reto_codebreakers_linux_x64
+./reto_codebreakers_linux_x64</pre><p>En WSL, primero navega a la carpeta montada, por ejemplo <code>cd /mnt/c/Users/TU_USUARIO/Downloads/CODEBREAKERS/participantes</code>. Ajusta la ruta a tu PC.</p></div>
+    <div class="check"><input type="checkbox" class="task" id="t1"><label for="t1">Tengo Ghidra abierto y encuentro el ejecutable del reto.</label></div>
+  </section>
+  <section class="card" id="paso1">
+    <div class="stepnum">Paso 1 · 3 minutos</div><div class="numbered-title"><span class="circle">1</span><h2>Crear el proyecto e importar el programa</h2></div>
+    <ol><li>En la ventana principal de Ghidra, haz clic en <strong>File → New Project</strong>.</li><li>Elige <strong>Non-Shared Project</strong>, define una carpeta y usa el nombre <code>ECI_CODEBREAKERS</code>.</li><li>Haz clic en <strong>File → Import File...</strong> y selecciona <code>reto_codebreakers_linux_x64</code>.</li><li>Comprueba que Ghidra lo identifica como ejecutable de tipo <strong>ELF</strong> para arquitectura <strong>x86-64</strong>.</li><li>Haz doble clic en el programa importado. Cuando aparezca la ventana de análisis, selecciona <strong>Yes → Analyze</strong>.</li></ol>
+    <div class="callout success">✅ <strong>Resultado esperado:</strong> se abre la ventana de análisis de Ghidra (CodeBrowser), con paneles como Listing y Decompiler.</div>
+    <div class="check"><input type="checkbox" class="task" id="t2"><label for="t2">Importé el ELF a Ghidra y finalicé el análisis automático.</label></div>
+  </section>
+  <section class="card" id="paso2">
+    <div class="stepnum">Paso 2 · 3 minutos</div><div class="numbered-title"><span class="circle">2</span><h2>Buscar pistas dentro del ejecutable</h2></div>
+    <ol><li>Con el programa abierto, usa <strong>Search → for Strings...</strong>.</li><li>Presiona <strong>Search</strong>. Revisa las cadenas de texto detectadas.</li><li>Busca mensajes sobre <strong>acceso concedido o denegado</strong>, solicitudes de clave y valores que parezcan una <strong>clave AES-256</strong> (32 bytes), un <strong>vector de inicialización (IV)</strong> o un <strong>texto cifrado</strong>. La contraseña no está en texto plano.</li><li>Haz doble clic en una cadena interesante para verla en la ventana <strong>Listing</strong>.</li></ol>
+    <div class="callout"><strong>Pregunta para pensar:</strong> si el programa está compilado, ¿por qué algunos mensajes todavía pueden leerse como texto normal?</div>
+    <div class="check"><input type="checkbox" class="task" id="t3"><label for="t3">Encontré al menos dos cadenas relevantes y una posible clave.</label></div>
+  </section>
+  <section class="card" id="paso3">
+    <div class="stepnum">Paso 3 · 4 minutos</div><div class="numbered-title"><span class="circle">3</span><h2>Identificar cómo se comprueba la clave</h2></div>
+    <ol><li>En <strong>Listing</strong>, selecciona una cadena que parezca estar relacionada con la validación.</li><li>Haz clic derecho y busca <strong>References → Show References To</strong> o una opción equivalente, según tu versión.</li><li>Abre una referencia que conduzca a código.</li><li>Revisa el panel <strong>Decompiler</strong> (si está oculto: <strong>Window → Decompiler</strong>).</li><li>Localiza una llamada parecida a <code>strcmp(entrada, ...)</code> y observa qué ocurre cuando su resultado es <code>0</code>.</li></ol>
+    <pre>// Este es un EJEMPLO conceptual, no la solución real:
+texto_descifrado = aes256_descifrar(TEXTO_CIFRADO, CLAVE_AES, IV);
+if (strcmp(texto_usuario, texto_descifrado) == 0) {
+    mostrar("ACCESO CONCEDIDO");
+} else {
+    mostrar("ACCESO DENEGADO");
+}</pre>
+    <div class="callout"><strong>Explicación sencilla:</strong> el programa no guarda la contraseña en texto plano. Primero <strong>descifra</strong> un texto cifrado con <strong>AES-256</strong> (usando una clave de 32 bytes y un vector de inicialización) y luego usa <code>strcmp</code>, que compara dos textos y devuelve <code>0</code> cuando son iguales. Debes explicar cómo se recupera la contraseña y cómo esa comparación controla la respuesta del programa.</div>
+    <div class="check"><input type="checkbox" class="task" id="t4"><label for="t4">Puedo señalar la comparación y explicar cuándo concede acceso.</label></div>
+  </section>
+  <section class="card" id="verifica">
+    <div class="stepnum">Paso 4 · 2 minutos</div><div class="numbered-title"><span class="circle">4</span><h2>Validar tu hipótesis</h2></div>
+    <p>Si tu equipo es solo Windows y no tiene WSL, puedes usar este <strong>verificador auxiliar sin conexión</strong>. Este formulario cifra tu clave con el mismo <strong>AES-256</strong> del reto y la compara con el texto cifrado; <strong>no ejecuta el archivo ELF</strong>.</p>
+    <div class="play"><div><label for="clave">Clave que descubriste en Ghidra</label><input id="clave" type="text" autocomplete="off" spellcheck="false" placeholder="Escribe tu hipótesis" aria-label="Clave del reto"></div><button class="btn" type="button" id="verify">Comprobar clave</button></div>
+    <div id="resultado" class="result" role="status" aria-live="polite">Aún no has enviado una clave.</div>
+    <div class="hints"><details><summary>Pista 1 · ¿Por dónde comenzar?</summary><p>Busca cadenas de texto en <strong>Search → for Strings</strong>. Verás la clave AES-256 de 32 bytes, el vector de inicialización (IV) y un texto cifrado, pero <strong>no</strong> la contraseña en texto plano.</p></details><details><summary>Pista 2 · ¿Qué relación tiene con AES-256 y strcmp?</summary><p>El programa descifra el texto con <strong>AES-256</strong> y luego compara la entrada del usuario mediante <code>strcmp</code>. Para resolverlo, reproduce el descifrado con la clave y el IV que encontraste.</p></details><details><summary>Pista 3 · ¿Cómo confirmo que encontré el lugar correcto?</summary><p>Explica qué ruta del <strong>if/else</strong> imprime «ACCESO CONCEDIDO» y verifica tu hipótesis aquí o con el programa en Linux/WSL.</p></details></div>
+    <h3>Si el monitor tiene Linux/WSL</h3><pre><button class="btn secondary copy no-print" data-copy="chmod +x reto_codebreakers_linux_x64\n./reto_codebreakers_linux_x64">Copiar</button>chmod +x reto_codebreakers_linux_x64
+./reto_codebreakers_linux_x64</pre>
+    <p class="small">El programa pedirá la clave en una terminal. Esta comprobación es la validación directa del binario.</p>
+    <div class="check"><input type="checkbox" class="task" id="t5"><label for="t5">Comprobé mi hipótesis y expliqué el resultado al monitor.</label></div>
+  </section>
+  <section class="card" id="evidencia">
+    <div class="stepnum">Paso 5 · 2 minutos</div><div class="numbered-title"><span class="circle">5</span><h2>Registrar la evidencia y cerrar</h2></div>
+    <p>Entrega estas cuatro evidencias al monitor; pueden ser capturas de pantalla o una demostración oral breve.</p>
+    <div class="check"><input type="checkbox" class="task" id="t6"><label for="t6"><span class="evidence">Captura A:</span> el archivo <code>reto_codebreakers_linux_x64</code> cargado en Ghidra.</label></div>
+    <div class="check"><input type="checkbox" class="task" id="t7"><label for="t7"><span class="evidence">Captura B:</span> una cadena de interés y su referencia a una función; explicación de la comparación <code>strcmp</code>; y validación de la clave.</label></div>
+    <div class="callout success"><strong>Reflexión final:</strong> ¿por qué no es seguro guardar una contraseña fija y reutilizable dentro de un programa distribuido a los usuarios? Aunque ahora esté cifrada con AES-256, la clave de descifrado también viaja dentro del ejecutable, así que el cifrado solo dificulta (no elimina) el problema.</div>
+    <button class="btn secondary no-print" id="reset" type="button">Reiniciar checklist en este navegador</button>
+  </section>
+  <section class="card">
+    <h2>🧯 Solución de problemas</h2>
+    <table><thead><tr><th>Problema</th><th>Qué hacer</th></tr></thead><tbody>
+      <tr><td>Windows pregunta con qué abrir el archivo sin extensión.</td><td>No hagas doble clic. Impórtalo <strong>desde Ghidra → File → Import File</strong>.</td></tr>
+      <tr><td>Windows muestra «Esta aplicación no se puede ejecutar en el equipo».</td><td>Es un ELF de Linux. Puedes analizarlo en Ghidra; para ejecutarlo necesitas Linux o WSL.</td></tr>
+      <tr><td>Ghidra no inicia.</td><td>Confirma que instalaste el JDK exigido por tu versión y ejecuta <code>ghidraRun.bat</code>.</td></tr>
+      <tr><td>No aparece el Decompiler.</td><td>Abre <strong>Window → Decompiler</strong>.</td></tr>
+      <tr><td>No aparecen cadenas útiles.</td><td>Espera a que concluya el análisis automático y repite la búsqueda de Strings.</td></tr>
+      <tr><td>No puedes ejecutar el ELF en tu Windows institucional.</td><td>Utiliza el verificador auxiliar de esta guía o solicita la ejecución al monitor.</td></tr>
+    </tbody></table>
+  </section>
+  <footer class="footer">CODEBREAKERS · El misterio del código oculto · Eciciencia 2026 · Laboratorio académico de Fundamentos de Seguridad de la Información (FDSI) · Escuela Colombiana de Ingeniería Julio Garavito. Preparado para uso educativo autorizado. Fuentes: <a href="https://github.com/NationalSecurityAgency/ghidra" target="_blank" rel="noopener noreferrer">Ghidra oficial</a> · <a href="https://github.com/NationalSecurityAgency/ghidra/blob/master/GhidraDocs/GettingStarted.md" target="_blank" rel="noopener noreferrer">Getting Started</a>.</footer>
+</main></div>
+<script>
+(function(){
+const items=[...document.querySelectorAll('.task')],key='codebreakers-eci-2026-progress-v2';
+try{const saved=JSON.parse(localStorage.getItem(key)||'{}');items.forEach(x=>x.checked=!!saved[x.id]);}catch(e){}
+function progress(){let done=items.filter(x=>x.checked).length;document.querySelector('#percentage').textContent=`Progreso: ${done} / ${items.length} acciones`;document.querySelector('#bar').style.width=(done/items.length*100)+'%';try{localStorage.setItem(key,JSON.stringify(Object.fromEntries(items.map(x=>[x.id,x.checked]))));}catch(e){}}
+items.forEach(x=>x.addEventListener('change',progress));progress();
+const osBtns=[...document.querySelectorAll('[data-os]')];osBtns.forEach(btn=>btn.addEventListener('click',()=>{const os=btn.dataset.os;osBtns.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.os===os)));document.querySelectorAll('.osview').forEach(v=>v.hidden=v.dataset.view!==os);}));
+const AES_SBOX=[0x63,0x7c,0x77,0x7b,0xf2,0x6b,0x6f,0xc5,0x30,0x01,0x67,0x2b,0xfe,0xd7,0xab,0x76,0xca,0x82,0xc9,0x7d,0xfa,0x59,0x47,0xf0,0xad,0xd4,0xa2,0xaf,0x9c,0xa4,0x72,0xc0,0xb7,0xfd,0x93,0x26,0x36,0x3f,0xf7,0xcc,0x34,0xa5,0xe5,0xf1,0x71,0xd8,0x31,0x15,0x04,0xc7,0x23,0xc3,0x18,0x96,0x05,0x9a,0x07,0x12,0x80,0xe2,0xeb,0x27,0xb2,0x75,0x09,0x83,0x2c,0x1a,0x1b,0x6e,0x5a,0xa0,0x52,0x3b,0xd6,0xb3,0x29,0xe3,0x2f,0x84,0x53,0xd1,0x00,0xed,0x20,0xfc,0xb1,0x5b,0x6a,0xcb,0xbe,0x39,0x4a,0x4c,0x58,0xcf,0xd0,0xef,0xaa,0xfb,0x43,0x4d,0x33,0x85,0x45,0xf9,0x02,0x7f,0x50,0x3c,0x9f,0xa8,0x51,0xa3,0x40,0x8f,0x92,0x9d,0x38,0xf5,0xbc,0xb6,0xda,0x21,0x10,0xff,0xf3,0xd2,0xcd,0x0c,0x13,0xec,0x5f,0x97,0x44,0x17,0xc4,0xa7,0x7e,0x3d,0x64,0x5d,0x19,0x73,0x60,0x81,0x4f,0xdc,0x22,0x2a,0x90,0x88,0x46,0xee,0xb8,0x14,0xde,0x5e,0x0b,0xdb,0xe0,0x32,0x3a,0x0a,0x49,0x06,0x24,0x5c,0xc2,0xd3,0xac,0x62,0x91,0x95,0xe4,0x79,0xe7,0xc8,0x37,0x6d,0x8d,0xd5,0x4e,0xa9,0x6c,0x56,0xf4,0xea,0x65,0x7a,0xae,0x08,0xba,0x78,0x25,0x2e,0x1c,0xa6,0xb4,0xc6,0xe8,0xdd,0x74,0x1f,0x4b,0xbd,0x8b,0x8a,0x70,0x3e,0xb5,0x66,0x48,0x03,0xf6,0x0e,0x61,0x35,0x57,0xb9,0x86,0xc1,0x1d,0x9e,0xe1,0xf8,0x98,0x11,0x69,0xd9,0x8e,0x94,0x9b,0x1e,0x87,0xe9,0xce,0x55,0x28,0xdf,0x8c,0xa1,0x89,0x0d,0xbf,0xe6,0x42,0x68,0x41,0x99,0x2d,0x0f,0xb0,0x54,0xbb,0x16];
+const AES_KEY='CodeBreakersECI_AES256_KEY_2026!',AES_IV='ECI_VECTOR_2026!',AES_CT='d67f5789f451afebf2b6e566f87fb979';
+function gmul(a,b){let p=0;for(let i=0;i<8;i++){if(b&1)p^=a;const hi=a&0x80;a=(a<<1)&0xff;if(hi)a^=0x1b;b>>=1;}return p;}
+function aesExpand(key){const w=Array.from({length:60},()=>[0,0,0,0]);for(let i=0;i<8;i++)w[i]=[key[4*i],key[4*i+1],key[4*i+2],key[4*i+3]];for(let i=8;i<60;i++){let t=w[i-1].slice();if(i%8===0){const x=t[0];t[0]=AES_SBOX[t[1]];t[1]=AES_SBOX[t[2]];t[2]=AES_SBOX[t[3]];t[3]=AES_SBOX[x];t[0]^=0x01<<(i/8-1);}else if(i%8===4){t=[AES_SBOX[t[0]],AES_SBOX[t[1]],AES_SBOX[t[2]],AES_SBOX[t[3]]];}w[i]=[w[i-8][0]^t[0],w[i-8][1]^t[1],w[i-8][2]^t[2],w[i-8][3]^t[3]];}return w;}
+function aesAdd(s,w,r){for(let c=0;c<4;c++)for(let r2=0;r2<4;r2++)s[r2][c]^=w[4*r+c][r2];}
+function aesSub(s){for(let r=0;r<4;r++)for(let c=0;c<4;c++)s[r][c]=AES_SBOX[s[r][c]];}
+function aesShift(s){let t;t=s[1][0];s[1][0]=s[1][1];s[1][1]=s[1][2];s[1][2]=s[1][3];s[1][3]=t;t=s[2][0];s[2][0]=s[2][2];s[2][2]=t;t=s[2][1];s[2][1]=s[2][3];s[2][3]=t;t=s[3][0];s[3][0]=s[3][3];s[3][3]=s[3][2];s[3][2]=s[3][1];s[3][1]=t;}
+function aesMix(s){for(let c=0;c<4;c++){const a0=s[0][c],a1=s[1][c],a2=s[2][c],a3=s[3][c];s[0][c]=gmul(a0,2)^gmul(a1,3)^a2^a3;s[1][c]=a0^gmul(a1,2)^gmul(a2,3)^a3;s[2][c]=a0^a1^gmul(a2,2)^gmul(a3,3);s[3][c]=gmul(a0,3)^a1^a2^gmul(a3,2);}}
+function aesEncBlock(b,key){const w=aesExpand(key),s=[[],[],[],[]];for(let r=0;r<4;r++)for(let c=0;c<4;c++)s[r][c]=b[r+4*c];aesAdd(s,w,0);for(let r=1;r<=13;r++){aesSub(s);aesShift(s);aesMix(s);aesAdd(s,w,r);}aesSub(s);aesShift(s);aesAdd(s,w,14);const o=[];for(let r=0;r<4;r++)for(let c=0;c<4;c++)o[r+4*c]=s[r][c];return o;}
+function toBytes(s){const b=[];for(let i=0;i<s.length;i++)b.push(s.charCodeAt(i)&0xff);return b;}
+function toHex(b){return b.map(x=>('0'+x.toString(16)).slice(-2)).join('');}
+function aesCbcEnc(pt,key,iv){const pad=16-(pt.length%16);for(let i=0;i<pad;i++)pt.push(pad);let prev=iv.slice();const out=[];for(let b=0;b<pt.length;b+=16){const bl=[];for(let i=0;i<16;i++)bl.push(pt[b+i]^prev[i]);const e=aesEncBlock(bl,key);for(let i=0;i<16;i++)out.push(e[i]);prev=e.slice();}return out;}
+function check(){let v=document.querySelector('#clave').value,r=document.querySelector('#resultado');r.className='result';if(!v){r.textContent='Escribe la clave que investigaste en Ghidra.';return;}if(toHex(aesCbcEnc(toBytes(v),toBytes(AES_KEY),toBytes(AES_IV)))===AES_CT){r.classList.add('good');r.innerHTML='<strong>ACCESO CONCEDIDO</strong><p>FLAG{CODEBREAKERS_ECI}</p><span>¡Bien! Explica al monitor dónde encontraste la clave AES-256, el vector de inicialización y cómo funciona la comparación.</span>';}else{r.classList.add('bad');r.textContent='ACCESO DENEGADO · Esa no es la clave. En Ghidra busca la clave AES-256, el IV y el texto cifrado; descífralos y vuelve a comparar.';}}
+document.querySelector('#verify').addEventListener('click',check);document.querySelector('#clave').addEventListener('keydown',e=>{if(e.key==='Enter')check()});
+document.querySelectorAll('[data-copy]').forEach(btn=>btn.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(btn.dataset.copy.replace(/\\n/g,'\n'));btn.textContent='Copiado ✓';}catch(e){btn.textContent='Selecciona el bloque y copia con Ctrl+C';}}));
+document.querySelector('#reset').addEventListener('click',()=>{items.forEach(x=>x.checked=false);progress();document.querySelector('#clave').value='';document.querySelector('#resultado').textContent='Aún no has enviado una clave.';document.querySelector('#resultado').className='result';});
+})();
+</script>
+</body></html>
