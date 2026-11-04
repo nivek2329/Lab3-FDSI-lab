@@ -1,0 +1,18 @@
+# Archivos de entorno y credenciales
+.env
+.env.*
+*.key
+*.pem
+*.cert
+
+# Reportes y artefactos temporales de escaneo local
+reports/
+*.json.tmp
+__pycache__/
+*.pyc
+
+# IDEs y SO
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store

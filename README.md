@@ -64,3 +64,29 @@ Las capturas principales se muestran a continuación. El [índice de evidencias]
 ## Uso responsable de IA
 
 Se utilizó asistencia de IA como apoyo para revisar la redacción y organizar el análisis. Las conclusiones deben contrastarse con las capturas, los logs y la ejecución de las herramientas incluidas como evidencia.
+
+
+---
+
+## 🛡️ Laboratorio 05 — Seguridad en el Ciclo de Desarrollo (AppSec / DevSecOps)
+
+Integración de controles automáticos de seguridad en GitHub Actions para el proyecto **NetOps Secure Execution Portal**:
+
+- 🔍 **SAST:** Análisis estático de código mediante Semgrep y CodeQL (`.github/workflows/seguridad-estatica.yml`).
+- 🔑 **Secret Detection:** Detección de secretos y credenciales con Gitleaks y GitHub Secret Scanning.
+- 📦 **SCA:** Detección de vulnerabilidades en dependencias mediante Dependabot.
+- 🌐 **DAST:** Evaluación dinámica pasiva con OWASP ZAP Baseline (`.github/workflows/dast-staging.yml`).
+- 🎯 **Pentesting controlado:** Validación de Clickjacking y falta de cabeceras de seguridad.
+- 🛠️ **Remediación:** Endurecimiento de configuración Nginx (`nginx/netops-portal.conf`) y cabeceras CSP/nosniff en frontend HTML.
+
+### Evidencias Visuales de Seguridad
+![Validación de Checks en Pull Request](docs/evidence/appsec/01_pull_request_all_checks_passed.png)
+
+![Tablero Interactivo AppSec Lab (8 de 8 completado)](docs/evidence/appsec/02_tablero_interactivo_8_etapas.png)
+
+### Documentación de Seguridad
+- 📄 [Informe de seguridad (Línea Base y Gestión)](docs/SECURITY.md)
+- 📋 [Reporte técnico de hallazgos y remediación](docs/REPORTE_HALLAZGOS.md)
+- ✅ [Checklist de seguridad para Pull Requests](docs/CHECKLIST_PR.md)
+- 🧭 [Guía de Integración AppSec](docs/README_INTEGRACION.md)
+- 📊 [Tablero interactivo del laboratorio](AppSec_Lab_FSI.html)
