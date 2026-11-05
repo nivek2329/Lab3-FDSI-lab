@@ -1,110 +1,86 @@
-# Laboratorio 4 — Ingeniería inversa
+# Laboratorio 6 — Code Breaker: El Misterio del Código Oculto
 
-Repositorio de entrega del laboratorio 4 de Fundamentos de Seguridad Informática. Incluye el paquete de trabajo, la guía con el desarrollo por pasos, las evidencias capturadas en Ghidra y terminal, y el análisis consolidado.
-
-## Contenido del laboratorio
-
-- [`FDSI_Guia2_Reverse_Engineering_ESTUDIANTES/`](FDSI_Guia2_Reverse_Engineering_ESTUDIANTES/): binarios y guía de la actividad.
-- [`docs/evidence/reverse/README.md`](docs/evidence/reverse/README.md): índice de evidencias y resultados por punto.
-- [`baseline.md`](docs/evidence/reverse/baseline.md) · [`baseline.txt`](docs/evidence/reverse/baseline.txt): preparación, capturas de baseline, identificación y hashes ([guía visual](docs/evidence/reverse/baseline.md), [registro completo](docs/evidence/reverse/baseline.txt)).
-- [`docs/evidence/reverse/level1.md`](docs/evidence/reverse/level1.md): análisis del nivel 1.
-- [`docs/evidence/reverse/level2.md`](docs/evidence/reverse/level2.md): análisis del nivel 2 en Ghidra.
-- [`docs/evidence/reverse/gdb.md`](docs/evidence/reverse/gdb.md): comprobación dinámica con GDB.
-- [`docs/evidence/reverse/boss.md`](docs/evidence/reverse/boss.md): análisis del binario stripped.
-- [`docs/evidence/reverse/preguntas-analisis.md`](docs/evidence/reverse/preguntas-analisis.md): respuestas de análisis.
-- [`docs/evidence/reverse/logs/`](docs/evidence/reverse/logs/): salidas de consola y sesiones de depuración.
-- [`docs/evidence/reverse/screenshots/`](docs/evidence/reverse/screenshots/): capturas numeradas, organizadas e identificadas en su índice.
-- [`reverse-analysis.md`](reverse-analysis.md): síntesis técnica y guion para la presentación.
-
-## Resultados
-
-| Reto | Hallazgo | Evidencia principal |
-|---|---|---|
-| Nivel 1 | `FLAG{strings_are_evidence}` | [`level1.md`](docs/evidence/reverse/level1.md) |
-| Nivel 2 | `FLAG{ghidra_plus_gdb}` | [`level2.md`](docs/evidence/reverse/level2.md), [`gdb.md`](docs/evidence/reverse/gdb.md) |
-| Boss stripped | `FLAG{ghidra_plus_gdb}` | [`boss.md`](docs/evidence/reverse/boss.md) |
-| Code Breaker (Lab 6) | `FLAG{CODEBREAKERS_ECI}` (Clave: `BREAKER#2026`) | [`REPORTE_CODEBREAKER.md`](docs/REPORTE_CODEBREAKER.md) |
+**Asignatura:** Fundamentos de Seguridad de la Información (FDSI)  
+**Institución:** Escuela Colombiana de Ingeniería Julio Garavito  
+**Grupo:** G06  
+**Integrantes:**
+- Kevin Andrey Ángel Acevedo
+- Sergio Daniel Buitrago Suancha
+- Daniel Julian Peña Bonilla
 
 ---
 
-## Actividad Code Breaker (Lab 6 / Eciciencia 2026)
-- **Informe Técnico Consolidado:** [`docs/REPORTE_CODEBREAKER.md`](docs/REPORTE_CODEBREAKER.md)
-- **Paquete y Binario:** [`codebreakers/`](codebreakers/)
-- **Galería de Evidencias:** [`docs/evidence/codebreaker/`](docs/evidence/codebreaker/)
-- **Clave en Texto Plano:** `BREAKER#2026`
-- **Bandera (Flag):** `FLAG{CODEBREAKERS_ECI}`
-- **Vector Criptográfico:** AES-256-CBC descifrado con llave `CodeBreakersECI_AES256_KEY_2026!` y vector `ECI_VECTOR_2026!`.
+## 🎯 Propósito y Misión del Reto
 
-## Reproducción
+El reto **Code Breaker** consiste en realizar ingeniería inversa sobre un programa ejecutable de laboratorio compilado en formato **ELF Linux x86-64** (`reto_codebreakers_linux_x64`), del cual **no se dispone de su código fuente**.
 
-1. Consulta [`README_ESTUDIANTE.md`](FDSI_Guia2_Reverse_Engineering_ESTUDIANTES/README_ESTUDIANTE.md) para los requisitos y el procedimiento de la actividad.
-2. Sigue [`docs/evidence/reverse/README.md`](docs/evidence/reverse/README.md) en orden. Cada sección enlaza las capturas y los logs que respaldan el resultado.
-3. Para el análisis detallado y el guion de cierre, consulta [`reverse-analysis.md`](reverse-analysis.md).
-
-## Evidencias visuales por punto
-
-Las capturas principales se muestran a continuación. El [índice de evidencias](docs/evidence/reverse/README.md) contiene la galería completa organizada por cada punto de la guía, con todas las capturas, sus descripciones y enlaces a los análisis.
-
-### Puntos 0–1 · Preparación y baseline
-
-![Hashes SHA-256 y tipo de archivo ELF](docs/evidence/reverse/screenshots/03_paso0-1_file_y_sha256_hashes.png)
-
-### Punto 2 · Nivel 1
-
-![Contraseña visible con strings](docs/evidence/reverse/screenshots/07_nivel1_strings_password_embebido.png)
-
-![Bandera obtenida en el nivel 1](docs/evidence/reverse/screenshots/09_nivel1_access_granted_flag.png)
-
-### Punto 3 · Nivel 2 con Ghidra
-
-![Función principal decompilada en Ghidra](docs/evidence/reverse/screenshots/15_nivel2_ghidra_main_decompilado.png)
-
-![Validación XOR analizada en Ghidra](docs/evidence/reverse/screenshots/16b_nivel2_ghidra_validate_key_renombrado_xor.png)
-
-![Bandera obtenida tras reconstruir la clave](docs/evidence/reverse/screenshots/18_nivel2_wsl_clave_valida_flag.png)
-
-### Punto 4 · Confirmación con GDB
-
-![GDB compara retornos 0 y 1](docs/evidence/reverse/screenshots/19_gdb_wsl_validate_key_retorno_0_vs_1.png)
-
-### Punto 5 · Boss Level stripped
-
-![Binario stripped importado en Ghidra](docs/evidence/reverse/screenshots/21_boss_ghidra_import_stripped_sin_simbolos.png)
-
-![Validación recuperada en Ghidra](docs/evidence/reverse/screenshots/25_boss_ghidra_validacion_recuperada_DAT_00402090_DAT_0040208b.png)
-## Uso responsable de IA
-
-Se utilizó asistencia de IA como apoyo para revisar la redacción y organizar el análisis. Las conclusiones deben contrastarse con las capturas, los logs y la ejecución de las herramientas incluidas como evidencia.
-
+El objetivo es descubrir la clave secreta que protege la bóveda digital y demostrar la obtención de la bandera (**FLAG**).
 
 ---
 
-## 🛡️ Laboratorio 05 — Seguridad en el Ciclo de Desarrollo (AppSec / DevSecOps)
+## 🏆 Resultados y Solución Verificada
 
-Integración de controles automáticos de seguridad en GitHub Actions para el proyecto **NetOps Secure Execution Portal**:
+| Parámetro | Resultado Obtenido |
+|---|---|
+| **Clave en Texto Claro** | `BREAKER#2026` |
+| **Bandera (Flag)** | `FLAG{CODEBREAKERS_ECI}` |
+| **Mensaje de Validación** | `ACCESO CONCEDIDO` |
+| **Algoritmo de Protección** | Cifrado simétrico AES-256 en modo CBC con padding PKCS#7 |
+| **Clave AES-256 (32 bytes)** | `CodeBreakersECI_AES256_KEY_2026!` |
+| **Vector de Inicialización (IV)** | `ECI_VECTOR_2026!` |
+| **Bloque Cifrado (`aes_ct`)** | `d6 7f 57 89 f4 51 af eb f2 b6 e5 66 f8 7f b9 79` |
+| **Punto de Decisión Lógica** | Función `main`, bifurcación `strcmp` (Líneas 461–468 en Ghidra) |
 
-- 🔍 **SAST:** Análisis estático de código mediante Semgrep (`.github/workflows/seguridad-estatica.yml`); reescaneo del commit actual pendiente.
-- 🔑 **Secret Detection:** Detección de secretos y credenciales con Gitleaks y GitHub Secret Scanning.
-- 📦 **SCA:** Detección de vulnerabilidades en dependencias mediante Dependabot.
-- 🌐 **DAST:** Evaluación dinámica pasiva con OWASP ZAP Baseline (`.github/workflows/dast-staging.yml`).
-- 🎯 **Pentesting controlado:** Validación de Clickjacking y falta de cabeceras de seguridad.
-- 🛠️ **Remediación:** Endurecimiento de configuración Nginx (`nginx/netops-portal.conf`) y cabeceras CSP/nosniff en frontend HTML.
+---
 
-### Evidencias Visuales de Seguridad
-![Validación de Checks en Pull Request](docs/evidence/appsec/01_pull_request_all_checks_passed.png)
+## 📂 Contenido Exclusivo del Laboratorio 6
 
-![Tablero Interactivo AppSec Lab (8 de 8 completado)](docs/evidence/appsec/02_tablero_interactivo_8_etapas.png)
+```
+.
+├── codebreakers/
+│   ├── reto_codebreakers_linux_x64                # Ejecutable ELF x86-64 del reto
+│   ├── CODEBREAKERS_Guia_Estudiantes_Windows.html # Guía interactiva y validador autónomo
+│   ├── LEEME_RETO.md                              # Guía y reglas del estudiante
+│   └── LEER_PRIMERO.txt                           # Indicaciones de inicio
+├── docs/
+│   ├── REPORTE_CODEBREAKER.md                     # Informe técnico detallado de 5 fases
+│   └── evidence/codebreaker/                      # Evidencias visuales y registros de ejecución
+│       ├── 01_ghidra_string_search_cadenas.jpg    # Búsqueda de cadenas en Ghidra
+│       ├── 02_ghidra_main_decompiler_inicio.jpg   # Entrada de la función main
+│       ├── 03_ghidra_main_listing_entry.jpg       # Vista del desensamblado Listing
+│       ├── 04_ghidra_decompiler_strcmp_validacion.jpg # Lógica de comparación strcmp
+│       ├── 05_ghidra_string_search_completo.jpg   # Cadenas de texto en .rodata
+│       ├── 06_ghidra_listing_rodata_banner.png    # Referencia cruzada (XREF) main
+│       ├── 07_ghidra_listing_bytes_clave_aes.png  # Llave AES-256 en memoria
+│       ├── 08_cyberchef_descifrado_aes_manual.png # Criptoanálisis manual en CyberChef
+│       └── 09_terminal_wsl_ejecucion_binario_flag.txt # Log de ejecución dinámica en WSL
+└── README.md
+```
 
-### Documentación de Seguridad
-- 📄 [Informe de seguridad (Línea Base y Gestión)](docs/SECURITY.md)
-- 📋 [Reporte técnico de hallazgos y remediación](docs/REPORTE_HALLAZGOS.md)
-- ✅ [Checklist de seguridad para Pull Requests](docs/CHECKLIST_PR.md)
-- 🧭 [Guía de Integración AppSec](docs/README_INTEGRACION.md)
-- 📊 [Tablero interactivo del laboratorio](AppSec_Lab_FSI.html)
+---
 
-## Sustentación
+## 🔬 Metodología de Resolución
 
-- Guion AppSec de cinco minutos: docs/SUSTENTACION_5_MIN.md
-- Inventario SCA: [docs/evidence/appsec/DEPENDENCIAS.md](docs/evidence/appsec/DEPENDENCIAS.md)
-- Estado de revalidación: [docs/evidence/appsec/ESTADO_REVALIDACION.md](docs/evidence/appsec/ESTADO_REVALIDACION.md)
-- Presentación PowerPoint: [docs/Sustentacion_AppSec_G06.pptx](docs/Sustentacion_AppSec_G06.pptx)
+1. **Inspección Inicial (Ghidra):**  
+   Se importó el binario `reto_codebreakers_linux_x64` como ELF x86-64 en Ghidra. Al realizar una búsqueda de cadenas (`Search -> For Strings...`), se identificó que la contraseña **no** estaba almacenada en texto plano.
+2. **Localización de Constantes Criptográficas:**  
+   En la sección `.rodata` se recuperaron la llave AES-256 (`CodeBreakersECI_AES256_KEY_2026!`), el vector IV (`ECI_VECTOR_2026!`) y el bloque cifrado `d6 7f 57 89 f4 51 af eb f2 b6 e5 66 f8 7f b9 79`.
+3. **Análisis del Flujo de Control:**  
+   En el descompilador de Ghidra (función `main`), se ubicó la comparación:
+   ```c
+   iVar21 = strcmp((char *)&local_1a8, (char *)&local_1c8);
+   if (iVar21 == 0) {
+       puts("ACCESO CONCEDIDO");
+       puts("FLAG{CODEBREAKERS_ECI}");
+   }
+   ```
+4. **Criptoanálisis Manual (CyberChef / PowerShell):**  
+   Al descifrar manualmente el bloque cifrado con AES-256-CBC, la clave y el IV, se obtuvo el texto plano: **`BREAKER#2026`**.
+5. **Validación Dinámica:**  
+   Al ejecutar `./reto_codebreakers_linux_x64` e introducir `BREAKER#2026`, el programa concede acceso y emite la bandera.
+
+---
+
+## 📄 Documentación Completa
+El informe formal con el desglose técnico, análisis de seguridad y lecciones aprendidas se encuentra en:  
+👉 [`docs/REPORTE_CODEBREAKER.md`](docs/REPORTE_CODEBREAKER.md)
