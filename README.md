@@ -10,7 +10,7 @@
 
 ---
 
-## 🎯 Propósito y Misión del Reto
+## Propósito y Misión del Reto
 
 El reto **Code Breaker** consiste en realizar ingeniería inversa sobre un programa ejecutable de laboratorio compilado en formato **ELF Linux x86-64** (`reto_codebreakers_linux_x64`), del cual **no se dispone de su código fuente**.
 
@@ -18,7 +18,7 @@ El objetivo es descubrir la clave secreta que protege la bóveda digital y demos
 
 ---
 
-## 🏆 Resultados y Solución Verificada
+## Resultados y Solución Verificada
 
 | Parámetro | Resultado Obtenido |
 |---|---|
@@ -33,7 +33,7 @@ El objetivo es descubrir la clave secreta que protege la bóveda digital y demos
 
 ---
 
-## 📂 Contenido Exclusivo del Laboratorio 6
+## Contenido Exclusivo del Laboratorio 6
 
 ```
 .
@@ -59,7 +59,7 @@ El objetivo es descubrir la clave secreta que protege la bóveda digital y demos
 
 ---
 
-## 🔬 Metodología de Resolución
+## Metodología de Resolución
 
 1. **Inspección Inicial (Ghidra):**  
    Se importó el binario `reto_codebreakers_linux_x64` como ELF x86-64 en Ghidra. Al realizar una búsqueda de cadenas (`Search -> For Strings...`), se identificó que la contraseña **no** estaba almacenada en texto plano.
@@ -81,6 +81,6 @@ El objetivo es descubrir la clave secreta que protege la bóveda digital y demos
 
 ---
 
-## 📄 Documentación Completa
+## Documentación Completa
 El informe formal con el desglose técnico, análisis de seguridad y lecciones aprendidas se encuentra en:  
-👉 [`docs/REPORTE_CODEBREAKER.md`](docs/REPORTE_CODEBREAKER.md)
+[`docs/REPORTE_CODEBREAKER.md`](docs/REPORTE_CODEBREAKER.md)
